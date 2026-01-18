@@ -1,11 +1,11 @@
 // ====== UPDATED KEY LIST (chỉ còn 20 key 1 thiết bị ngẫu nhiên) ======
 window.UCHIHA_KEYS = {
   
-  "bnguyen-10p": { 
+  "bnguyen12928": { 
     note: "Key chỉ mở cho 1 thiết bị duy nhất", 
     $device_id: null 
   },
-  "sharekey-1h": { 
+  "srorj1h": { 
     note: "Key chỉ mở cho 1 thiết bị duy nhất", 
     $device_id: null 
   },
