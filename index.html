@@ -2,176 +2,97 @@
 <html lang="vi">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Bi Enter Device | Link Bio</title>
+<title>Bấm là dính 👻</title>
 
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap');
-
-*{
-    box-sizing:border-box;
-    font-family:'Poppins',sans-serif;
-}
-
 body{
     margin:0;
-    min-height:100vh;
-    background:radial-gradient(circle at top,#3a0ca3,#0b0014);
+    font-family:Arial, Helvetica, sans-serif;
+}
+
+/* Trang đầu */
+#home{
+    height:100vh;
     display:flex;
     justify-content:center;
     align-items:center;
-    color:#fff;
+    background:#111;
 }
 
-.bio-container{
-    width:100%;
-    max-width:420px;
-    padding:25px;
-    text-align:center;
-}
-
-/* AVATAR */
-.avatar{
-    width:130px;
-    height:130px;
-    margin:0 auto 15px;
-    border-radius:50%;
-    overflow:hidden;
-    border:4px solid #a855f7;
-    box-shadow:0 0 25px #a855f7;
-}
-
-.avatar img{
-    width:100%;
-    height:100%;
-    object-fit:cover;
-}
-
-/* NAME */
-.name{
-    font-size:26px;
-    font-weight:700;
-}
-
-.sub{
-    font-size:14px;
-    opacity:.85;
-    margin-bottom:25px;
-}
-
-/* BUTTON */
-.link{
-    display:block;
-    text-decoration:none;
-    color:#fff;
-    background:linear-gradient(135deg,#7c3aed,#c084fc);
-    padding:15px;
-    border-radius:14px;
-    margin-bottom:14px;
-    font-weight:600;
-    box-shadow:0 8px 25px rgba(168,85,247,.45);
-    transition:.25s;
-}
-
-.link:hover{
-    transform:translateY(-3px) scale(1.02);
-}
-
-/* MUSIC BUTTON */
-.music-btn{
-    position:fixed;
-    bottom:20px;
-    right:20px;
-    background:#a855f7;
-    color:#fff;
-    border:none;
-    width:55px;
-    height:55px;
-    border-radius:50%;
+button{
+    padding:18px 40px;
     font-size:22px;
+    border:none;
+    border-radius:12px;
+    background:#ffcc00;
+    font-weight:bold;
     cursor:pointer;
-    box-shadow:0 0 20px #a855f7;
 }
 
-.footer{
-    margin-top:25px;
-    font-size:12px;
-    opacity:.6;
+/* Trang hù */
+#scary{
+    height:100vh;
+    background:black;
+    display:none;
+    justify-content:center;
+    align-items:center;
+    overflow:hidden;
+    animation:flash 0.2s infinite;
+}
+
+@keyframes flash{
+    0%{background:black;}
+    50%{background:#200;}
+    100%{background:black;}
+}
+
+#text{
+    color:white;
+    font-size:40px;
+    text-align:center;
+    text-shadow:0 0 20px red;
+    line-height:1.6;
 }
 </style>
 </head>
 
 <body>
 
-<!-- NHẠC NỀN -->
-<audio id="bgMusic" loop>
-    <source src="https://files.catbox.moe/a78h4x.mp3" type="audio/mpeg">
-</audio>
-
-<button class="music-btn" onclick="toggleMusic()">🎵</button>
-
-<div class="bio-container">
-
-    <!-- AVATAR -->
-    <div class="avatar">
-        <img src="https://sf-static.upanhlaylink.com/img/image_202602056c088e76cd44cc727e6649e543b015c2.jpg" alt="Bi Enter Device">
-    </div>
-
-    <!-- NAME -->
-    <div class="name">Bi Enter Device</div>
-    <div class="sub">Web • Acc Clone • Hack • Cộng Đồng</div>
-
-    <!-- WEBSITE -->
-    <a class="link" onclick="openLink('https://bientershop.io.vn')">
-        🌐 Website – Mua Bán Acc Clone & Hack
-    </a>
-
-    <!-- ZALO ADMIN -->
-    <a class="link" onclick="openLink('https://zalo.me/0877660792')">
-        📞 Zalo Admin
-    </a>
-
-    <!-- FACEBOOK ADMIN -->
-    <a class="link" onclick="openLink('https://www.facebook.com/share/1CFxgvNuTy/?mibextid=wwXIfr')">
-        📘 Facebook Admin
-    </a>
-
-    <!-- TELE MUA & SHARE -->
-    <a class="link" onclick="openLink('https://t.me/leavencheat')">
-        🛒 Nhóm Tele – Mua & Share Đồ Chơi
-    </a>
-
-    <!-- TELE CHAT -->
-    <a class="link" onclick="openLink('https://t.me/+OAIXB6jdYwM3Zjg1')">
-        💬 Nhóm Chat Tele – Trò Chuyện & Khoe Kĩ Năng
-    </a>
-
-    <!-- ZALO GROUP -->
-    <a class="link" onclick="openLink('https://zalo.me/g/yfmocf505')">
-        📦 Nhóm Zalo – Mua & Share Đồ
-    </a>
-
-    <div class="footer">© 2026 Bi Enter Device</div>
+<div id="home">
+    <button onclick="go()">BẤM Đi 🎁</button>
 </div>
 
+<div id="scary">
+    <div id="text"></div>
+</div>
+
+<audio id="sound" src="https://image2url.com/r2/default/videos/1770802137743-a2ad7b3a-e1c8-44f3-9dab-a611e1808c9e.mp4"></audio>
+
 <script>
-/* FIX MỞ LINK TRONG TIKTOK / ZALO */
-function openLink(url){
-    window.location.href = url;
-}
+function go(){
+    document.getElementById("home").style.display = "none";
+    document.getElementById("scary").style.display = "flex";
+    document.getElementById("sound").play();
 
-/* NHẠC */
-const music = document.getElementById("bgMusic");
-let playing = false;
+    const lines = [
+        "Diệp ơi...",
+        "Mày là con chó nô tì 🐕",
+        "Cái lồn bà mày nhớ mặt tao...",
+        "Nhìn Cái Con Cặc...",
+        "Mày Nói Ai Đao😈"
+    ];
 
-function toggleMusic(){
-    if(!playing){
-        music.play();
-        playing = true;
-    }else{
-        music.pause();
-        playing = false;
-    }
+    let i = 0;
+    const text = document.getElementById("text");
+
+    const interval = setInterval(()=>{
+        if(i < lines.length){
+            text.innerHTML += lines[i] + "<br>";
+            i++;
+        } else {
+            clearInterval(interval);
+        }
+    }, 1200); // thời gian xuất hiện mỗi câu
 }
 </script>
 
