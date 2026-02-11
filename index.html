@@ -2,99 +2,96 @@
 <html lang="vi">
 <head>
 <meta charset="UTF-8">
-<title>Bấm là dính 👻</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Menu Đang Bảo Trì</title>
+
+<!-- Font -->
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600&family=Roboto:wght@400;500&display=swap" rel="stylesheet">
 
 <style>
-body{
-    margin:0;
-    font-family:Arial, Helvetica, sans-serif;
-}
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: 'Roboto', sans-serif;
+    }
 
-/* Trang đầu */
-#home{
-    height:100vh;
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    background:#111;
-}
+    body {
+        height: 100vh;
+        background: radial-gradient(circle at top, #1a1a1a, #000);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: #fff;
+        overflow: hidden;
+    }
 
-button{
-    padding:18px 40px;
-    font-size:22px;
-    border:none;
-    border-radius:12px;
-    background:#ffcc00;
-    font-weight:bold;
-    cursor:pointer;
-}
+    .container {
+        text-align: center;
+        padding: 30px 25px;
+        border-radius: 16px;
+        background: rgba(255, 255, 255, 0.06);
+        backdrop-filter: blur(10px);
+        box-shadow: 0 0 40px rgba(255, 0, 0, 0.25);
+        max-width: 420px;
+        animation: fadeIn 1.2s ease;
+    }
 
-/* Trang hù */
-#scary{
-    height:100vh;
-    background:black;
-    display:none;
-    justify-content:center;
-    align-items:center;
-    overflow:hidden;
-    animation:flash 0.2s infinite;
-}
+    .icon {
+        font-size: 60px;
+        margin-bottom: 15px;
+        animation: pulse 1.5s infinite;
+    }
 
-@keyframes flash{
-    0%{background:black;}
-    50%{background:#200;}
-    100%{background:black;}
-}
+    h1 {
+        font-family: 'Orbitron', sans-serif;
+        font-size: 22px;
+        margin-bottom: 12px;
+        color: #ff3b3b;
+        text-shadow: 0 0 12px rgba(255, 0, 0, 0.7);
+    }
 
-#text{
-    color:white;
-    font-size:40px;
-    text-align:center;
-    text-shadow:0 0 20px red;
-    line-height:1.6;
-}
+    p {
+        font-size: 15px;
+        line-height: 1.7;
+        opacity: 0.95;
+        margin-bottom: 10px;
+    }
+
+    .footer {
+        margin-top: 15px;
+        font-size: 13px;
+        opacity: 0.7;
+    }
+
+    @keyframes fadeIn {
+        from {
+            opacity: 0;
+            transform: translateY(20px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    @keyframes pulse {
+        0% { transform: scale(1); }
+        50% { transform: scale(1.08); }
+        100% { transform: scale(1); }
+    }
 </style>
 </head>
-
 <body>
 
-<div id="home">
-    <button onclick="go()">BẤM Đi 🎁</button>
+<div class="container">
+    <div class="icon">🛠️</div>
+    <h1>MENU ĐANG BẢO TRÌ</h1>
+    <p><strong>Menu của chúng tôi đang tạm dừng để bảo trì<br>và cập nhật phiên bản mới.</strong></p>
+    <p>Kính mong mọi người vui lòng chờ đợi.</p>
+    <p>Chúng tôi sẽ cập nhật sớm nhất có thể.</p>
+    <div class="footer">Trân trọng ❤️</div>
 </div>
-
-<div id="scary">
-    <div id="text"></div>
-</div>
-
-<audio id="sound" src="https://image2url.com/r2/default/videos/1770802137743-a2ad7b3a-e1c8-44f3-9dab-a611e1808c9e.mp4"></audio>
-
-<script>
-function go(){
-    document.getElementById("home").style.display = "none";
-    document.getElementById("scary").style.display = "flex";
-    document.getElementById("sound").play();
-
-    const lines = [
-        "Diệp ơi...",
-        "Mày là con chó nô tì 🐕",
-        "Cái lồn bà mày nhớ mặt tao...",
-        "Nhìn Cái Con Cặc...",
-        "Mày Nói Ai Đao😈"
-    ];
-
-    let i = 0;
-    const text = document.getElementById("text");
-
-    const interval = setInterval(()=>{
-        if(i < lines.length){
-            text.innerHTML += lines[i] + "<br>";
-            i++;
-        } else {
-            clearInterval(interval);
-        }
-    }, 1200); // thời gian xuất hiện mỗi câu
-}
-</script>
 
 </body>
 </html>
