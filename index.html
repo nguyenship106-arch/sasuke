@@ -3,95 +3,227 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Menu Đang Bảo Trì</title>
-
-<!-- Font -->
-<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600&family=Roboto:wght@400;500&display=swap" rel="stylesheet">
+<title>SOI CẦU VIP</title>
 
 <style>
-    * {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
-        font-family: 'Roboto', sans-serif;
-    }
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap');
 
-    body {
-        height: 100vh;
-        background: radial-gradient(circle at top, #1a1a1a, #000);
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        color: #fff;
-        overflow: hidden;
-    }
+body{
+    margin:0;
+    font-family:'Poppins',sans-serif;
+    background: radial-gradient(circle at top,#2b0000,#0f0000);
+    color:white;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    height:100vh;
+}
 
-    .container {
-        text-align: center;
-        padding: 30px 25px;
-        border-radius: 16px;
-        background: rgba(255, 255, 255, 0.06);
-        backdrop-filter: blur(10px);
-        box-shadow: 0 0 40px rgba(255, 0, 0, 0.25);
-        max-width: 420px;
-        animation: fadeIn 1.2s ease;
-    }
+.box{
+    background:linear-gradient(145deg,#1a0000,#2a0000);
+    padding:35px;
+    border-radius:18px;
+    width:390px;
+    text-align:center;
+    box-shadow:0 0 40px rgba(255,0,0,0.4);
+    border:1px solid rgba(255,0,0,0.3);
+}
 
-    .icon {
-        font-size: 60px;
-        margin-bottom: 15px;
-        animation: pulse 1.5s infinite;
-    }
+h1{
+    color:#ff2e2e;
+    margin-bottom:20px;
+    font-weight:700;
+}
 
-    h1 {
-        font-family: 'Orbitron', sans-serif;
-        font-size: 22px;
-        margin-bottom: 12px;
-        color: #ff3b3b;
-        text-shadow: 0 0 12px rgba(255, 0, 0, 0.7);
-    }
+input{
+    width:100%;
+    padding:14px;
+    margin:10px 0;
+    border:none;
+    border-radius:10px;
+    background:#330000;
+    color:white;
+    font-size:14px;
+    outline:none;
+}
 
-    p {
-        font-size: 15px;
-        line-height: 1.7;
-        opacity: 0.95;
-        margin-bottom: 10px;
-    }
+input::placeholder{
+    color:#ff9999;
+}
 
-    .footer {
-        margin-top: 15px;
-        font-size: 13px;
-        opacity: 0.7;
-    }
+button{
+    width:100%;
+    padding:14px;
+    margin-top:10px;
+    border:none;
+    border-radius:10px;
+    background:linear-gradient(90deg,#ff0000,#ff4d4d);
+    color:white;
+    font-weight:600;
+    cursor:pointer;
+    transition:0.3s;
+}
 
-    @keyframes fadeIn {
-        from {
-            opacity: 0;
-            transform: translateY(20px);
-        }
-        to {
-            opacity: 1;
-            transform: translateY(0);
-        }
-    }
+button:hover{
+    transform:scale(1.05);
+    box-shadow:0 0 20px #ff0000;
+}
 
-    @keyframes pulse {
-        0% { transform: scale(1); }
-        50% { transform: scale(1.08); }
-        100% { transform: scale(1); }
-    }
+.link-btn{
+    display:block;
+    margin-top:10px;
+    padding:12px;
+    border-radius:10px;
+    text-decoration:none;
+    font-weight:600;
+    background:#1f0000;
+    border:1px solid rgba(255,0,0,0.4);
+    color:#ff9999;
+    transition:0.3s;
+}
+
+.link-btn:hover{
+    background:#330000;
+    color:white;
+}
+
+.result{
+    margin-top:20px;
+    text-align:left;
+    font-size:14px;
+    line-height:1.7;
+    background:#200000;
+    padding:15px;
+    border-radius:12px;
+    border:1px solid rgba(255,0,0,0.3);
+    min-height:120px;
+}
+
+.hidden{
+    display:none;
+}
+
+.message{
+    margin-top:10px;
+    font-weight:600;
+}
+
+.success{
+    color:#00ff99;
+}
+
+.error{
+    color:#ff4d4d;
+}
+
+.loading{
+    text-align:center;
+    animation: blink 1s infinite;
+}
+
+@keyframes blink{
+    50%{opacity:0.4;}
+}
 </style>
 </head>
+
 <body>
 
-<div class="container">
-    <div class="icon">🛠️</div>
-    <h1>MENU ĐANG BẢO TRÌ</h1>
-    <p><strong>Menu của chúng tôi đang tạm dừng để bảo trì<br>và cập nhật phiên bản mới.</strong></p>
-    <p>Kính mong mọi người vui lòng chờ đợi.</p>
-    <p>Chúng tôi sẽ cập nhật sớm nhất có thể.</p>
-    <div class="footer">Trân trọng ❤️</div>
+<div class="box">
+
+    <!-- NHẬP KEY -->
+    <div id="keyScreen">
+        <h1>🔐 NHẬP KEY </h1>
+
+        <input type="text" id="keyInput" placeholder="Nhập key truy cập">
+        <button onclick="checkKey()">XÁC NHẬN</button>
+
+        <div id="keyMessage" class="message"></div>
+
+        <!-- 🔥 THAY LINK CỦA BẠN Ở DƯỚI -->
+        <a class="link-btn" href="https://zalo.me/0877660792" target="_blank">
+            Zalo 📱
+        </a>
+
+        <a class="link-btn" href="https://www.facebook.com/share/1HPJmTbwNw/?mibextid=wwXIfr" target="_blank">
+            Facebook 📘
+        </a>
+    </div>
+
+    <!-- SOI PHIÊN -->
+    <div id="mainScreen" class="hidden">
+        <h1>📊 SOI CẦU Sunwin</h1>
+        <input type="text" id="phien" placeholder="Nhập mã phiên">
+        <button onclick="soi()">SOI NGAY</button>
+        <div class="result" id="ketqua"></div>
+    </div>
+
 </div>
+
+<script>
+
+let validKeys = [
+    "Freekey",
+    "BIENTER999",
+    "PRO2026VIP",
+    "NGUYEN888",
+    "KEYVIP666"
+];
+
+function checkKey(){
+    let inputKey = document.getElementById("keyInput").value;
+    let msg = document.getElementById("keyMessage");
+
+    if(validKeys.includes(inputKey)){
+        msg.className = "message success";
+        msg.innerHTML = "✅ Key đúng! Đang xác minh...";
+
+        setTimeout(() => {
+            document.getElementById("keyScreen").classList.add("hidden");
+            document.getElementById("mainScreen").classList.remove("hidden");
+        }, 1500);
+
+    } else {
+        msg.className = "message error";
+        msg.innerHTML = "❌ Key sai! Vui lòng liên hệ admin.";
+    }
+}
+
+function soi(){
+    let phien = document.getElementById("phien").value;
+
+    if(phien.trim() === ""){
+        document.getElementById("ketqua").innerHTML = "⚠️ Vui lòng nhập phiên!";
+        return;
+    }
+
+    document.getElementById("ketqua").innerHTML = `
+<div class="loading">
+⏳ Đang phân tích dữ liệu phiên #${phien}...<br><br>
+🔴 Vui lòng chờ 3 giây...
+</div>
+    `;
+
+    setTimeout(() => {
+
+        let chanle = Math.random() > 0.5 ? "Tài" : "Xỉu";
+        let icon = chanle === "Chẵn" ? "🟢" : "🔴";
+        let nhanDinh = Math.random() > 0.5 ? "Cầu bệt chân" : "Xu hướng đảo chiều";
+
+        document.getElementById("ketqua").innerHTML = `
+📊 <b>KẾT QUẢ SOI CẦU</b><br>
+━━━━━━━━━━━━━━━━━━<br>
+🔢 Phiên: #${phien}<br>
+🎯 Dự đoán: ${chanle} ${icon}<br>
+📝 Nhận định: ${nhanDinh}<br>
+━━━━━━━━━━━━━━━━━━<br>
+⚠️ Lưu ý: nhập sai phiên tỷ lệ sẽ không đúng
+        `;
+
+    }, 3000);
+}
+
+</script>
 
 </body>
 </html>
