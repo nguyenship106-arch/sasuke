@@ -3,224 +3,410 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>SOI CẦU VIP</title>
+<title>LEAVEN.VN</title>
 
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap');
 
 body{
-    margin:0;
-    font-family:'Poppins',sans-serif;
-    background: radial-gradient(circle at top,#2b0000,#0f0000);
-    color:white;
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    height:100vh;
+margin:0;
+overflow:hidden;
+background:black;
+font-family:sans-serif;
 }
 
-.box{
-    background:linear-gradient(145deg,#1a0000,#2a0000);
-    padding:35px;
-    border-radius:18px;
-    width:390px;
-    text-align:center;
-    box-shadow:0 0 40px rgba(255,0,0,0.4);
-    border:1px solid rgba(255,0,0,0.3);
+/* MATRIX */
+
+canvas{
+position:fixed;
+top:0;
+left:0;
+z-index:-1;
 }
 
-h1{
-    color:#ff2e2e;
-    margin-bottom:20px;
-    font-weight:700;
+/* LOGIN */
+
+#loginBox{
+position:fixed;
+top:50%;
+left:50%;
+transform:translate(-50%,-50%);
+width:300px;
+background:#141821;
+border-radius:12px;
+padding:20px;
+text-align:center;
+box-shadow:0 0 20px #ff7b00;
 }
 
-input{
-    width:100%;
-    padding:14px;
-    margin:10px 0;
-    border:none;
-    border-radius:10px;
-    background:#330000;
-    color:white;
-    font-size:14px;
-    outline:none;
+#loginBox h1{
+color:#ff7b00;
+margin-bottom:15px;
 }
 
-input::placeholder{
-    color:#ff9999;
+#loginBox input{
+width:90%;
+padding:10px;
+border-radius:6px;
+border:none;
+margin-bottom:10px;
 }
 
-button{
-    width:100%;
-    padding:14px;
-    margin-top:10px;
-    border:none;
-    border-radius:10px;
-    background:linear-gradient(90deg,#ff0000,#ff4d4d);
-    color:white;
-    font-weight:600;
-    cursor:pointer;
-    transition:0.3s;
+#loginBox button{
+background:#ff7b00;
+border:none;
+padding:10px 20px;
+color:white;
+border-radius:8px;
+font-size:16px;
 }
 
-button:hover{
-    transform:scale(1.05);
-    box-shadow:0 0 20px #ff0000;
+.link{
+display:block;
+margin-top:6px;
+color:#00eaff;
+text-decoration:none;
 }
 
-.link-btn{
-    display:block;
-    margin-top:10px;
-    padding:12px;
-    border-radius:10px;
-    text-decoration:none;
-    font-weight:600;
-    background:#1f0000;
-    border:1px solid rgba(255,0,0,0.4);
-    color:#ff9999;
-    transition:0.3s;
+/* MENU */
+
+#menu{
+display:none;
+position:absolute;
+top:120px;
+left:60px;
+width:260px;
+background:#141821;
+border-radius:12px;
+color:white;
+box-shadow:0 0 15px black;
 }
 
-.link-btn:hover{
-    background:#330000;
-    color:white;
+#header{
+padding:12px;
+background:#ff7b00;
+text-align:center;
+border-radius:12px 12px 0 0;
+font-weight:bold;
+cursor:move;
+position:relative;
 }
 
-.result{
-    margin-top:20px;
-    text-align:left;
-    font-size:14px;
-    line-height:1.7;
-    background:#200000;
-    padding:15px;
-    border-radius:12px;
-    border:1px solid rgba(255,0,0,0.3);
-    min-height:120px;
+#close{
+position:absolute;
+right:10px;
+top:8px;
+cursor:pointer;
 }
 
-.hidden{
-    display:none;
+.section{
+padding:10px;
+border-bottom:1px solid #2a2f3a;
 }
 
-.message{
-    margin-top:10px;
-    font-weight:600;
+.section h3{
+margin:5px 0;
+color:#ff7b00;
 }
 
-.success{
-    color:#00ff99;
+/* SWITCH */
+
+.switch{
+position:relative;
+display:inline-block;
+width:40px;
+height:20px;
+float:right;
 }
 
-.error{
-    color:#ff4d4d;
+.switch input{
+display:none;
 }
 
-.loading{
-    text-align:center;
-    animation: blink 1s infinite;
+.slider{
+position:absolute;
+top:0;
+left:0;
+right:0;
+bottom:0;
+background:#555;
+border-radius:20px;
 }
 
-@keyframes blink{
-    50%{opacity:0.4;}
+.slider:before{
+content:"";
+position:absolute;
+height:16px;
+width:16px;
+left:2px;
+bottom:2px;
+background:white;
+border-radius:50%;
+transition:.3s;
 }
+
+input:checked + .slider{
+background:#ff7b00;
+}
+
+input:checked + .slider:before{
+transform:translateX(20px);
+}
+
+input[type=range]{
+width:100%;
+}
+
+/* FOV */
+
+#fovCircle{
+position:fixed;
+top:50%;
+left:50%;
+border:2px solid red;
+border-radius:50%;
+transform:translate(-50%,-50%);
+display:none;
+pointer-events:none;
+}
+
+/* CROSSHAIR */
+
+#crosshair{
+position:fixed;
+top:50%;
+left:50%;
+width:40px;
+transform:translate(-50%,-50%);
+display:none;
+pointer-events:none;
+}
+
+.contactBtn{
+display:block;
+margin-top:6px;
+background:#ff7b00;
+padding:7px;
+text-align:center;
+border-radius:6px;
+color:white;
+text-decoration:none;
+}
+
 </style>
 </head>
 
 <body>
 
-<div class="box">
+<canvas id="matrix"></canvas>
 
-    <!-- NHẬP KEY -->
-    <div id="keyScreen">
-        <h1>🔐 NHẬP KEY </h1>
+<div id="fovCircle"></div>
 
-        <input type="text" id="keyInput" placeholder="Nhập key truy cập">
-        <button onclick="checkKey()">XÁC NHẬN</button>
+<img id="crosshair" src="https://i.postimg.cc/fTvjLqpd/IMG-2481.png">
 
-        <div id="keyMessage" class="message"></div>
+<!-- LOGIN -->
 
-        <!-- 🔥 THAY LINK CỦA BẠN Ở DƯỚI -->
-        <a class="link-btn" href="https://zalo.me/0877660792" target="_blank">
-            Zalo 📱
-        </a>
+<div id="loginBox">
 
-        <a class="link-btn" href="https://www.facebook.com/share/1HPJmTbwNw/?mibextid=wwXIfr" target="_blank">
-            Facebook 📘
-        </a>
-    </div>
+<h1>LEAVEN.VN</h1>
 
-    <!-- SOI PHIÊN -->
-    <div id="mainScreen" class="hidden">
-        <h1>📊 SOI CẦU Sunwin</h1>
-        <input type="text" id="phien" placeholder="Nhập mã phiên">
-        <button onclick="soi()">SOI NGAY</button>
-        <div class="result" id="ketqua"></div>
-    </div>
+<input id="keyInput" placeholder="Nhập KEY">
+
+<br>
+
+<button onclick="login()">LOGIN</button>
+
+<a class="link" href="https://zalo.me/0877660792">ZALO ADMIN</a>
+<a class="link" href="https://t.me/Bi_no01">TELEGRAM ADMIN</a>
+
+</div>
+
+<!-- MENU -->
+
+<div id="menu">
+
+<div id="header">
+LEAVEN.VN
+<span id="close">✕</span>
+</div>
+
+<div class="section">
+
+<h3>AIMBOT</h3>
+
+Aim Bot
+<label class="switch">
+<input type="checkbox">
+<span class="slider"></span>
+</label>
+
+<br><br>
+
+FOV
+<label class="switch">
+<input type="checkbox" id="fovToggle">
+<span class="slider"></span>
+</label>
+
+<input type="range" id="fovRange" min="0" max="360" value="120">
+
+</div>
+
+<div class="section">
+
+<h3>TÂM ẢO</h3>
+
+Crosshair
+<label class="switch">
+<input type="checkbox" id="crossToggle">
+<span class="slider"></span>
+</label>
+
+</div>
+
+<div class="section">
+
+<h3>LIÊN HỆ ADMIN</h3>
+
+<a class="contactBtn" href="https://zalo.me/0877660792">ZALO</a>
+<a class="contactBtn" href="https://t.me/Bi_no01">TELEGRAM</a>
+
+</div>
 
 </div>
 
 <script>
 
-let validKeys = [
-    "PhucCongAnLon",
-    "ChanKhangancac",
-    "PRO2026VIP",
-    "Bệnhk",
-    "KEYVIP666"
-];
+/* MATRIX */
 
-function checkKey(){
-    let inputKey = document.getElementById("keyInput").value;
-    let msg = document.getElementById("keyMessage");
+const canvas=document.getElementById("matrix")
+const ctx=canvas.getContext("2d")
 
-    if(validKeys.includes(inputKey)){
-        msg.className = "message success";
-        msg.innerHTML = "✅ Key đúng! Đang xác minh...";
+canvas.height=window.innerHeight
+canvas.width=window.innerWidth
 
-        setTimeout(() => {
-            document.getElementById("keyScreen").classList.add("hidden");
-            document.getElementById("mainScreen").classList.remove("hidden");
-        }, 1500);
+const letters="01LEAVEN"
+const fontSize=16
+const columns=canvas.width/fontSize
 
-    } else {
-        msg.className = "message error";
-        msg.innerHTML = "❌ Key sai! Vui lòng liên hệ admin.";
-    }
+const drops=[]
+
+for(let i=0;i<columns;i++){
+drops[i]=1
 }
 
-function soi(){
-    let phien = document.getElementById("phien").value;
+function draw(){
 
-    if(phien.trim() === ""){
-        document.getElementById("ketqua").innerHTML = "⚠️ Vui lòng nhập phiên!";
-        return;
-    }
+ctx.fillStyle="rgba(0,0,0,0.05)"
+ctx.fillRect(0,0,canvas.width,canvas.height)
 
-    document.getElementById("ketqua").innerHTML = `
-<div class="loading">
-⏳ Đang phân tích dữ liệu phiên #${phien}...<br><br>
-🔴 Vui lòng chờ 3 giây...
-</div>
-    `;
+ctx.fillStyle="#0f0"
+ctx.font=fontSize+"px monospace"
 
-    setTimeout(() => {
+for(let i=0;i<drops.length;i++){
 
-        let chanle = Math.random() > 0.5 ? "Tài" : "Xỉu";
-        let icon = chanle === "Chẵn" ? "🟢" : "🔴";
-        let nhanDinh = Math.random() > 0.5 ? "Cầu bệt chân" : "Xu hướng đảo chiều";
+const text=letters[Math.floor(Math.random()*letters.length)]
 
-        document.getElementById("ketqua").innerHTML = `
-📊 <b>KẾT QUẢ SOI CẦU</b><br>
-━━━━━━━━━━━━━━━━━━<br>
-🔢 Phiên: #${phien}<br>
-🎯 Dự đoán: ${chanle} ${icon}<br>
-📝 Nhận định: ${nhanDinh}<br>
-━━━━━━━━━━━━━━━━━━<br>
-⚠️ Lưu ý: nhập sai phiên tỷ lệ sẽ không đúng
-        `;
+ctx.fillText(text,i*fontSize,drops[i]*fontSize)
 
-    }, 3000);
+if(drops[i]*fontSize>canvas.height && Math.random()>0.975){
+drops[i]=0
+}
+
+drops[i]++
+
+}
+
+}
+
+setInterval(draw,35)
+
+/* LOGIN */
+
+function login(){
+
+const key=document.getElementById("keyInput").value
+
+if(key==="LEAVENVIP"){
+
+document.getElementById("loginBox").style.display="none"
+document.getElementById("menu").style.display="block"
+
+}else{
+
+alert("KEY SAI")
+
+}
+
+}
+
+/* MENU CLOSE */
+
+document.getElementById("close").onclick=()=>{
+menu.style.display="none"
+}
+
+/* 3 FINGER */
+
+document.addEventListener("touchstart",e=>{
+
+if(e.touches.length===3){
+
+menu.style.display="block"
+
+}
+
+})
+
+/* DRAG */
+
+let startX,startY
+const menu=document.getElementById("menu")
+const header=document.getElementById("header")
+
+header.addEventListener("touchstart",e=>{
+startX=e.touches[0].clientX-menu.offsetLeft
+startY=e.touches[0].clientY-menu.offsetTop
+})
+
+document.addEventListener("touchmove",e=>{
+
+if(startX===undefined)return
+
+menu.style.left=e.touches[0].clientX-startX+"px"
+menu.style.top=e.touches[0].clientY-startY+"px"
+
+})
+
+document.addEventListener("touchend",()=>{
+startX=undefined
+})
+
+/* FOV */
+
+const fovToggle=document.getElementById("fovToggle")
+const fovRange=document.getElementById("fovRange")
+const fovCircle=document.getElementById("fovCircle")
+
+fovToggle.onchange=()=>{
+fovCircle.style.display=fovToggle.checked?"block":"none"
+}
+
+fovRange.oninput=()=>{
+
+let size=fovRange.value*2
+
+fovCircle.style.width=size+"px"
+fovCircle.style.height=size+"px"
+
+}
+
+/* CROSSHAIR */
+
+const crossToggle=document.getElementById("crossToggle")
+const crosshair=document.getElementById("crosshair")
+
+crossToggle.onchange=()=>{
+crosshair.style.display=crossToggle.checked?"block":"block"
 }
 
 </script>
