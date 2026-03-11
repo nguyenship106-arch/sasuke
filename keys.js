@@ -5,7 +5,7 @@ window.UCHIHA_KEYS = {
     note: "Key chỉ mở cho 1 thiết bị duy nhất", 
     $device_id: null 
   },
-  "srorj1h": { 
+  "sangdjtlinh": { 
     note: "Key chỉ mở cho 1 thiết bị duy nhất", 
     $device_id: null 
   },
