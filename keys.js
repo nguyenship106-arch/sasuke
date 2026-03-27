@@ -1,7 +1,7 @@
 // ====== UPDATED KEY LIST (chỉ còn 20 key 1 thiết bị ngẫu nhiên) ======
 window.UCHIHA_KEYS = {
   
-  "atuancuto": { 
+  "bidz@9": { 
     note: "Key chỉ mở cho 1 thiết bị duy nhất", 
     $device_id: null 
   },
@@ -9,7 +9,7 @@ window.UCHIHA_KEYS = {
     note: "Key chỉ mở cho 1 thiết bị duy nhất", 
     $device_id: null 
   },
-  "Zani": { 
+  "Za99": { 
     note: "Key chỉ mở cho 1 thiết bị duy nhất", 
     $device_id: null 
   },
