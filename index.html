@@ -244,8 +244,26 @@ button{
 </div>
 
 <script src="keys.js"></script>
-
 <script>
+function login(){
+  var key = document.getElementById("key").value.trim();
+  var status = document.getElementById("status");
+
+  if(!key){
+    status.innerText = "Nhập key!";
+    return;
+  }
+
+  if(window.HeadLockV1 && window.HeadLockV1[key]){
+    status.innerText = "✅ Key hợp lệ! Đang chuyển...";
+    setTimeout(()=>{
+      window.location.href = "menu.html";
+    },500);
+  }else{
+    status.innerText = "❌ Sai key!";
+  }
+}
+</script>
 function copyLink(){
   var input=document.getElementById("link");
   input.select();
