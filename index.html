@@ -275,33 +275,7 @@ function login(){
   }
 }
 </script>
-function copyLink(){
-  var input=document.getElementById("link");
-  input.select();
-  document.execCommand("copy");
-  alert("Đã copy!");
-}
 
-function closePopup(){
-  document.getElementById("popup").style.display="none";
-}
-
-function login(){
-  var key=document.getElementById("key").value.trim();
-  var status=document.getElementById("status");
-
-  if(!key){
-    status.innerText="Nhập key!";
-    return;
-  }
-
-  if(window.UCHIHA_KEYS && window.UCHIHA_KEYS[key]){
-    status.innerText="Key Đúng";
-    setTimeout(()=>{
-      window.location.href="menu.html";
-    },500);
-  }else{
-    status.innerText="Sai key!";
   }
 }
 </script>
