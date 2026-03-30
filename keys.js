@@ -1,6 +1,6 @@
 // keys.js
 // 🌸 Lưu 50 key HeadLockV1- riêng
-window.UCHIHA_KEYS = {
+window.HeadLockV1 = {
   "HeadLockV1-001A-1B2C": true,
   "HeadLockV1-002B-3D4E": true,
   "HeadLockV1-003C-5F6G": true,
