@@ -244,6 +244,18 @@ button{
 
 <script src="keys.js"></script>
 <script>
+function copyLink(){
+  var input = document.getElementById("link");
+  input.select();
+  input.setSelectionRange(0,99999); // cho mobile
+  document.execCommand("copy");
+  alert("Đã copy link!");
+}
+
+function closePopup(){
+  document.getElementById("popup").style.display = "none";
+}
+
 function login(){
   var key = document.getElementById("key").value.trim();
   var status = document.getElementById("status");
@@ -258,7 +270,7 @@ function login(){
     setTimeout(()=>{
       window.location.href = "menu.html";
     },500);
-  }else{
+  } else {
     status.innerText = "❌ Sai key!";
   }
 }
