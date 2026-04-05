@@ -4,7 +4,7 @@ window.HeadLockV1 = {
   "HeadLockV1-001A-1B2C": true,
   "BaoNguyenDZ": true,
   "ShareKeyFree": true,
-  "HeadLockV1-004D-7H8I": true,
+  "Duong2k11": true,
   "HeadLockV1-005E-9J0K": true,
   "HeadLockV1-006F-1L2M": true,
   "HeadLockV1-007G-3N4O": true,
