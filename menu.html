@@ -1,201 +1,227 @@
 <!DOCTYPE html>
 <html lang="vi">
 <head>
-  <meta charset="UTF-8">
-  <title>MENU AIM - Bi Enter</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <style>
-    * {
-      font-family: 'Poppins', sans-serif;
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
-    body {
-      background: #121212;
-      color: #fff;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      min-height: 100vh;
-      padding: 20px;
-    }
-    .app-container {
-      width: 100%;
-      max-width: 400px;
-      background: #1f1f1f;
-      border-radius: 20px;
-      padding: 20px;
-      box-shadow: 0 0 10px #000;
-    }
-    h2 {
-      text-align: center;
-      margin-bottom: 5px;
-      font-weight: 600;
-      color: #00ffd5;
-      font-size: 20px;
-    }
-    .subtitle {
-      text-align: center;
-      font-size: 14px;
-      color: #ccc;
-      margin-bottom: 15px;
-    }
-    .toggle-group {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      background: #292929;
-      margin: 10px 0;
-      padding: 12px 15px;
-      border-radius: 12px;
-      transition: 0.3s;
-      border: 2px solid transparent;
-      animation: glow 3s infinite alternate;
-    }
-    .toggle-group:hover {
-      background: #333;
-    }
-    .toggle-group span {
-      font-size: 15px;
-      font-weight: 500;
-    }
-    .desc {
-      font-size: 12px;
-      color: #aaa;
-    }
-    .switch {
-      position: relative;
-      display: inline-block;
-      width: 50px;
-      height: 25px;
-    }
-    .switch input {
-      opacity: 0;
-      width: 0;
-      height: 0;
-    }
-    .slider {
-      position: absolute;
-      cursor: pointer;
-      top: 0; left: 0; right: 0; bottom: 0;
-      background-color: #ccc;
-      transition: .4s;
-      border-radius: 25px;
-    }
-    .slider:before {
-      position: absolute;
-      content: "";
-      height: 18px;
-      width: 18px;
-      left: 4px;
-      bottom: 3.5px;
-      background-color: white;
-      transition: .4s;
-      border-radius: 50%;
-    }
-    input:checked + .slider {
-      background-color: #00ffd5;
-    }
-    input:checked + .slider:before {
-      transform: translateX(24px);
-    }
-    @keyframes glow {
-      0% {
-        box-shadow: 0 0 10px #00ffd5, 0 0 20px #00ffd5, 0 0 30px #00ffd5;
-        border-color: #00ffd5;
-      }
-      50% {
-        box-shadow: 0 0 10px #ff00ff, 0 0 20px #ff00ff, 0 0 30px #ff00ff;
-        border-color: #ff00ff;
-      }
-      100% {
-        box-shadow: 0 0 10px #00ff55, 0 0 20px #00ff55, 0 0 30px #00ff55;
-        border-color: #00ff55;
-      }
-    }
-    .dpi-container {
-      margin-top: 20px;
-      text-align: center;
-    }
-    .dpi-container input[type="range"] {
-      width: 100%;
-      margin-top: 10px;
-    }
-    .dpi-value {
-      font-size: 16px;
-      margin-top: 5px;
-      color: #00ffd5;
-    }
-    .info-box {
-      margin-top: 20px;
-      padding: 15px;
-      background: #292929;
-      border-left: 4px solid #00ffd5;
-      border-radius: 10px;
-      display: none;
-    }
-    .info-box.active {
-      display: block;
-    }
-  </style>
+<meta charset="UTF-8">
+<title>MENU AIM - Bi Enter</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<style>
+* {
+  font-family: 'Poppins', sans-serif;
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background: #121212;
+  color: #fff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+}
+
+.app-container {
+  width: 100%;
+  max-width: 400px;
+  background: #1f1f1f;
+  border-radius: 20px;
+  padding: 20px;
+}
+
+h2 {
+  text-align: center;
+  color: #00ffd5;
+}
+
+.subtitle {
+  text-align: center;
+  font-size: 14px;
+  color: #ccc;
+  margin-bottom: 15px;
+}
+
+.toggle-group {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #292929;
+  margin: 10px 0;
+  padding: 12px;
+  border-radius: 12px;
+}
+
+/* SWITCH */
+.switch {
+  position: relative;
+  width: 50px;
+  height: 25px;
+}
+
+.switch input {
+  display: none;
+}
+
+.slider {
+  position: absolute;
+  inset: 0;
+  background: #ccc;
+  border-radius: 25px;
+}
+
+.slider:before {
+  content: "";
+  position: absolute;
+  height: 18px;
+  width: 18px;
+  left: 4px;
+  bottom: 3.5px;
+  background: white;
+  border-radius: 50%;
+  transition: .3s;
+}
+
+input:checked + .slider {
+  background: #00ffd5;
+}
+
+input:checked + .slider:before {
+  transform: translateX(24px);
+}
+
+/* DPI */
+.dpi-container {
+  margin-top: 20px;
+  text-align: center;
+}
+
+.dpi-container input {
+  width: 100%;
+}
+
+/* CONSOLE */
+.console {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.95);
+  display: none;
+  justify-content: center;
+  align-items: center;
+  z-index: 999;
+}
+
+.console-box {
+  width: 90%;
+  max-width: 400px;
+  background: #000;
+  padding: 15px;
+  border-radius: 10px;
+  box-shadow: 0 0 20px #00ffd5;
+}
+
+.console-text {
+  color: #00ffd5;
+  font-size: 13px;
+}
+</style>
 </head>
+
 <body>
-  <div class="app-container">
-    <h2>HeadLock V1</h2>
-    <div class="subtitle">Bi Enter
+
+<div class="app-container">
+  <h2>HeadLock V1</h2>
+  <div class="subtitle">Bao Nguyen</div>
+
+  <!-- MENU -->
+  <div class="toggle-group"><span>AIMLOCK VIP</span><label class="switch"><input type="checkbox" onchange="toggleInfo('aimlock', this.checked)"><span class="slider"></span></label></div>
+  <div class="toggle-group"><span>AIMHEAD</span><label class="switch"><input type="checkbox" onchange="toggleInfo('aimhead', this.checked)"><span class="slider"></span></label></div>
+  <div class="toggle-group"><span>AIMBOT</span><label class="switch"><input type="checkbox" onchange="toggleInfo('aimbot', this.checked)"><span class="slider"></span></label></div>
+  <div class="toggle-group"><span>SENSITIVITY</span><label class="switch"><input type="checkbox" onchange="toggleInfo('sensitivity', this.checked)"><span class="slider"></span></label></div>
+  <div class="toggle-group"><span>FIX LAG</span><label class="switch"><input type="checkbox" onchange="toggleInfo('fixlag', this.checked)"><span class="slider"></span></label></div>
+  <div class="toggle-group"><span>FIX RUNG</span><label class="switch"><input type="checkbox" onchange="toggleInfo('fixrung', this.checked)"><span class="slider"></span></label></div>
+  <div class="toggle-group"><span>HEADLOCK VIP</span><label class="switch"><input type="checkbox" onchange="toggleInfo('headlock', this.checked)"><span class="slider"></span></label></div>
+  <div class="toggle-group"><span>TỐI ƯU MÁY</span><label class="switch"><input type="checkbox" onchange="toggleInfo('toiuu', this.checked)"><span class="slider"></span></label></div>
+  <div class="toggle-group"><span>Fix Game Free Fire</span><label class="switch"><input type="checkbox" onchange="toggleInfo('fix1', this.checked)"><span class="slider"></span></label></div>
+  <div class="toggle-group"><span>Fix Game Free Fire Max</span><label class="switch"><input type="checkbox" onchange="toggleInfo('fix2', this.checked)"><span class="slider"></span></label></div>
+
+  <!-- DPI -->
+  <div class="dpi-container">
+    🎯 DPI: <span id="dpi-value">275</span>
+    <input type="range" min="0" max="550" value="275" oninput="updateDPI(this.value)">
+  </div>
 </div>
 
-    <!-- Các chức năng -->
-    <div class="toggle-group"><div><span>AIMLOCK VIP</span><br><small class="desc">Bám đầu</small></div><label class="switch"><input type="checkbox" onchange="toggleInfo('aimlock', this.checked)"><span class="slider"></span></label></div>
-    <div class="toggle-group"><div><span>AIMHEAD</span><br><small class="desc">Bám chặt vùng đầu</small></div><label class="switch"><input type="checkbox" onchange="toggleInfo('aimhead', this.checked)"><span class="slider"></span></label></div>
-    <div class="toggle-group"><div><span>AIMBOT</span><br><small class="desc">Bám tâm cao</small></div><label class="switch"><input type="checkbox" onchange="toggleInfo('aimbot', this.checked)"><span class="slider"></span></label></div>
-    <div class="toggle-group"><div><span>SENSITIVITY</span><br><small class="desc">Mượt máy, nhẹ máy</small></div><label class="switch"><input type="checkbox" onchange="toggleInfo('sensitivity', this.checked)"><span class="slider"></span></label></div>
-    <div class="toggle-group"><div><span>FIX LAG</span><br><small class="desc">Giảm mạng kém, tối ưu chơi game</small></div><label class="switch"><input type="checkbox" onchange="toggleInfo('fixlag', this.checked)"><span class="slider"></span></label></div>
-    <div class="toggle-group"><div><span>FIX RUNG</span><br><small class="desc">Ổn định hình ảnh, giảm giật rung</small></div><label class="switch"><input type="checkbox" onchange="toggleInfo('fixrung', this.checked)"><span class="slider"></span></label></div>
-    <div class="toggle-group"><div><span>HEADLOCK VIP</span><br><small class="desc">Tăng nhạy bám đầu VIP</small></div><label class="switch"><input type="checkbox" onchange="toggleInfo('headlock', this.checked)"><span class="slider"></span></label></div>
-    <div class="toggle-group"><div><span>TỐI ƯU MÁY</span><br><small class="desc">Giảm tất cả để máy mượt</small></div><label class="switch"><input type="checkbox" onchange="toggleInfo('toiuu', this.checked)"><span class="slider"></span></label></div>
-
-    <!-- Thanh kéo DPI -->
-    <div class="dpi-container">
-      <label for="dpi">🎯 DPI: <span id="dpi-value">275</span></label>
-      <input type="range" id="dpi" min="0" max="550" value="275" oninput="updateDPI(this.value)">
-    </div>
-
-    <!-- Hiển thị thông tin chức năng đang bật -->
-    <div id="infoBox" class="info-box"></div>
+<!-- CONSOLE -->
+<div id="console" class="console">
+  <div class="console-box">
+    <div id="consoleText" class="console-text"></div>
   </div>
+</div>
 
-  <script>
-    function updateDPI(value) {
-      document.getElementById('dpi-value').innerText = value;
+<script>
+const infoMap = {
+  aimlock:"AIMLOCK VIP",
+  aimhead:"AIMHEAD",
+  aimbot:"AIMBOT",
+  sensitivity:"SENSITIVITY",
+  fixlag:"FIX LAG",
+  fixrung:"FIX RUNG",
+  headlock:"HEADLOCK VIP",
+  toiuu:"TỐI ƯU MÁY",
+  fix1:"Fix Game Free Fire",
+  fix2:"Fix Game Free Fire Max"
+};
+
+let running = false;
+
+function toggleInfo(key, checked){
+  if(running) return;
+  running = true;
+
+  const consoleBox = document.getElementById("console");
+  const textBox = document.getElementById("consoleText");
+
+  consoleBox.style.display = "flex";
+  textBox.innerHTML = "";
+
+  let lines = checked ? [
+    "⚙️ Initializing...",
+    "🔍 Scanning...",
+    "💉 Injecting " + infoMap[key] + "...",
+    "⚡ Optimizing...",
+    "✅ " + infoMap[key] + " thành công"
+  ] : [
+    "⛔ Stopping " + infoMap[key] + "...",
+    "🧹 Cleaning...",
+    "❌ Đã tắt " + infoMap[key]
+  ];
+
+  let i = 0;
+
+  function run(){
+    if(i < lines.length){
+      textBox.innerHTML += lines[i] + "<br>";
+      i++;
+      setTimeout(run, 300);
+    } else {
+      setTimeout(()=>{
+        consoleBox.style.display = "none";
+        running = false;
+      },800);
     }
+  }
 
-    const infoMap = {
-      aimlock: "💡 AIMLOCK VIP: Bám đầu",
-      aimhead: "💡 AIMHEAD: Bám chặt vùng đầu",
-      aimbot: "💡 AIMBOT: Bám tâm cao",
-      sensitivity: "💡 SENSITIVITY: Mượt máy, nhẹ máy",
-      fixlag: "💡 FIX LAG: Giảm mạng kém, tối ưu chơi game",
-      fixrung: "💡 FIX RUNG: Ổn định hình ảnh, giảm giật rung",
-      headlock: "💡 HEADLOCK VIP: Tăng nhạy bám đầu VIP",
-      toiuu: "💡 TỐI ƯU MÁY: Giảm tất cả để máy mượt"
-    };
+  run();
+}
 
-    function toggleInfo(key, isChecked) {
-      const box = document.getElementById('infoBox');
-      if (isChecked) {
-        box.classList.add('active');
-        box.innerHTML += "<div>" + infoMap[key] + "</div>";
-      } else {
-        const temp = document.createElement("div");
-        temp.innerHTML = infoMap[key];
-        [...box.children].forEach(child => {
-          if (child.innerHTML === temp.innerHTML) child.remove();
-        });
-        if (box.children.length === 0) box.classList.remove('active');
-      }
-    }
-  </script>
+function updateDPI(val){
+  document.getElementById("dpi-value").innerText = val;
+}
+</script>
+
 </body>
 </html>
