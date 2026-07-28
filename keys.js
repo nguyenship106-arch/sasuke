@@ -1,7 +1,7 @@
 window.HeadLockV1 = {
   "BunoraVN-001A-1B2C": true,
   "dkdnjdjdn": true,
-  "avjdujd": true,
+  "BunoraVN-Nduccacto": true,
   "BunoraVN-005E-9J0K": true,
   "BunoraVN-006F-1L2M": true,
   "BunoraVN-007G-3N4O": true,
