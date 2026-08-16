@@ -2,283 +2,587 @@
 <html lang="vi">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-<title>Bunora VN</title>
-
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>Shop Bi Enter – Bảng Giá</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,400&family=Be+Vietnam+Pro:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <style>
-body{
-  margin:0;
-  font-family:Arial;
-  background:linear-gradient(180deg,#2b2b2b,#0f0f0f);
-  color:#fff;
+:root{
+  --bg1:#0d0015;--pink:#ff6eb4;--pink-soft:#ffb3d9;
+  --violet:#c084fc;--neon-pink:#ff2d87;--gold:#fde68a;
+  --cyan:#22d3ee;--green:#4ade80;--white:#fff5fb;
+  --border:rgba(255,110,180,.22);
+  --card-w:100%;
 }
+*{margin:0;padding:0;box-sizing:border-box;}
+html{font-size:15px;}
+html,body{width:100%;min-height:100vh;overflow-x:hidden;}
+body{background:var(--bg1);font-family:'Be Vietnam Pro',sans-serif;-webkit-text-size-adjust:100%;}
 
-/* FIX ZOOM */
-input{font-size:16px;}
+.aurora{position:fixed;inset:0;z-index:0;
+  background:radial-gradient(ellipse 80% 55% at 15% 10%,rgba(140,0,200,.4) 0%,transparent 65%),
+    radial-gradient(ellipse 65% 50% at 85% 15%,rgba(255,0,120,.3) 0%,transparent 65%),
+    radial-gradient(ellipse 70% 45% at 50% 80%,rgba(100,0,180,.38) 0%,transparent 65%),
+    linear-gradient(160deg,#0d0015 0%,#1e0035 35%,#2a0048 60%,#0f0020 100%);
+  animation:aurora-pulse 10s ease-in-out infinite alternate;}
+@keyframes aurora-pulse{0%{filter:brightness(1) hue-rotate(0deg)}50%{filter:brightness(1.12) hue-rotate(14deg)}100%{filter:brightness(1.22) hue-rotate(-10deg)}}
+.grain{position:fixed;inset:0;z-index:1;pointer-events:none;opacity:.03;
+  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-size:180px;}
+.orbs{position:fixed;inset:0;z-index:1;pointer-events:none;}
+.orb{position:absolute;border-radius:50%;filter:blur(90px);animation:orb-drift ease-in-out infinite alternate;}
+.orb-1{width:400px;height:400px;top:-120px;left:-100px;background:radial-gradient(circle,rgba(191,0,255,.28),transparent 70%);animation-duration:13s;}
+.orb-2{width:350px;height:350px;top:5%;right:-70px;background:radial-gradient(circle,rgba(255,45,135,.22),transparent 70%);animation-duration:17s;animation-delay:-5s;}
+.orb-3{width:500px;height:280px;bottom:-80px;left:10%;background:radial-gradient(circle,rgba(140,0,200,.2),transparent 70%);animation-duration:20s;animation-delay:-9s;}
+@keyframes orb-drift{from{transform:translate(0,0) scale(1)}to{transform:translate(28px,22px) scale(1.12)}}
+#stars,#snow{position:fixed;inset:0;pointer-events:none;}
+#stars{z-index:2;}#snow{z-index:3;}
+.crystals{position:fixed;inset:0;z-index:4;pointer-events:none;overflow:hidden;}
+.crystal{position:absolute;bottom:-40px;opacity:0;animation:rise linear infinite;user-select:none;}
+@keyframes rise{0%{opacity:0;transform:translateY(0) rotate(0deg) scale(.5)}8%{opacity:.9}88%{opacity:.4}100%{opacity:0;transform:translateY(-110vh) rotate(420deg) scale(1.15)}}
 
-/* HEADLOCK */
-.headlock{
-  position:fixed;
-  top:10px;
-  left:0;
-  width:100%;
-  text-align:center;
-  font-size:22px;
-  font-weight:bold;
-  z-index:9999;
-  color:#fff;
-  text-shadow:0 0 10px red,0 0 20px red;
-  animation:blink 3s infinite;
-}
+/* ══ POPUP CHÀO ══ */
+.overlay{position:fixed;inset:0;z-index:300;background:rgba(8,0,18,.78);backdrop-filter:blur(14px);display:flex;align-items:center;justify-content:center;padding:16px;animation:ov-in .5s ease both;}
+.overlay.hide{animation:ov-out .6s ease forwards;pointer-events:none;}
+@keyframes ov-in{from{opacity:0}to{opacity:1}}
+@keyframes ov-out{from{opacity:1}to{opacity:0}}
+.popup{position:relative;width:100%;max-width:420px;background:linear-gradient(150deg,rgba(45,0,75,.96),rgba(18,0,38,.98));border:1px solid rgba(255,110,180,.28);border-radius:22px;padding:38px 28px 30px;text-align:center;box-shadow:0 0 80px rgba(191,0,255,.22),0 30px 90px rgba(0,0,0,.7);animation:pop-in .65s cubic-bezier(.22,1,.36,1) both;overflow:hidden;}
+@keyframes pop-in{from{opacity:0;transform:scale(.82) translateY(28px)}to{opacity:1;transform:scale(1) translateY(0)}}
+.popup::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,var(--neon-pink),var(--violet),var(--neon-pink),transparent);background-size:200% 100%;animation:shimmer 2.5s linear infinite;}
+@keyframes shimmer{from{background-position:200% 0}to{background-position:-200% 0}}
+.btn-close{position:absolute;top:12px;right:14px;background:transparent;border:none;color:rgba(255,180,220,.35);cursor:pointer;transition:color .2s;padding:4px;display:flex;}
+.btn-close:hover{color:var(--pink);}
+.popup-flower{display:flex;justify-content:center;margin-bottom:12px;}
+.popup-flower svg{animation:float-icon 3s ease-in-out infinite;}
+@keyframes float-icon{0%,100%{transform:translateY(0) rotate(-5deg)}50%{transform:translateY(-8px) rotate(5deg)}}
+.popup-shop{font-size:.65rem;letter-spacing:.28em;text-transform:uppercase;color:var(--pink);font-weight:700;margin-bottom:14px;}
+.popup-divider{width:44px;height:2px;margin:0 auto 18px;background:linear-gradient(90deg,var(--neon-pink),var(--violet));border-radius:2px;}
+.notice-block{display:flex;flex-direction:column;gap:10px;margin-bottom:22px;}
+.notice-line{padding:11px 16px;border-radius:12px;font-size:.85rem;line-height:1.6;color:rgba(255,230,245,.88);}
+.notice-line.line-1{background:rgba(255,45,135,.1);border:1px solid rgba(255,45,135,.25);}
+.notice-line.line-1 strong{color:var(--pink);font-weight:700;}
+.notice-line.line-2{background:rgba(192,132,252,.1);border:1px solid rgba(192,132,252,.25);}
+.notice-line.line-2 .t1c{color:#ff9fd0;font-weight:600;}
+.notice-line.line-2 .t2c{color:#c084fc;font-weight:600;}
+.notice-line.line-2 .t3c{color:#fde68a;font-weight:600;}
+.notice-line.line-3{background:rgba(255,110,180,.07);border:1px solid rgba(255,110,180,.14);font-size:.82rem;color:rgba(255,210,235,.6);}
+.notice-line.line-3 strong{color:var(--pink-soft);font-weight:600;}
+.cbar-bg{height:3px;border-radius:3px;background:rgba(255,255,255,.08);overflow:hidden;margin-bottom:6px;}
+.cbar{height:100%;border-radius:3px;background:linear-gradient(90deg,var(--neon-pink),var(--violet));width:100%;transition:width .1s linear;box-shadow:0 0 8px var(--neon-pink);}
+.clabel{font-size:.65rem;color:rgba(255,180,220,.38);letter-spacing:.08em;}
 
-@keyframes blink{
-  0%{opacity:0}
-  20%{opacity:1}
-  80%{opacity:1}
-  100%{opacity:0}
-}
+/* ══ POPUP CAM KẾT ══ */
+.trust-overlay{position:fixed;inset:0;z-index:400;background:rgba(4,0,12,.88);backdrop-filter:blur(16px);display:flex;align-items:center;justify-content:center;padding:16px;opacity:0;pointer-events:none;transition:opacity .4s ease;}
+.trust-overlay.show{opacity:1;pointer-events:all;}
+.trust-popup{position:relative;width:100%;max-width:440px;background:linear-gradient(150deg,rgba(30,0,55,.97),rgba(10,0,28,.98));border:1px solid rgba(255,110,180,.3);border-radius:22px;padding:42px 28px 34px;text-align:center;box-shadow:0 0 100px rgba(255,45,135,.18),0 40px 100px rgba(0,0,0,.8);transform:scale(.85) translateY(24px);transition:transform .45s cubic-bezier(.22,1,.36,1);overflow:hidden;max-height:92vh;overflow-y:auto;}
+.trust-overlay.show .trust-popup{transform:scale(1) translateY(0);}
+.trust-popup::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,#fde68a,#ff6eb4,#c084fc,#fde68a,transparent);background-size:200% 100%;animation:shimmer 3s linear infinite;}
+.trust-close{position:absolute;top:12px;right:14px;background:transparent;border:none;color:rgba(255,180,220,.35);cursor:pointer;transition:color .2s;padding:4px;display:flex;}
+.trust-close:hover{color:var(--pink);}
+.trust-icon{display:flex;justify-content:center;margin-bottom:14px;}
+.trust-icon svg{animation:shield-pulse 2s ease-in-out infinite;}
+@keyframes shield-pulse{0%,100%{transform:scale(1);filter:drop-shadow(0 0 8px rgba(74,222,128,.5))}50%{transform:scale(1.08);filter:drop-shadow(0 0 20px rgba(74,222,128,.8))}}
+.trust-tag{display:inline-flex;align-items:center;gap:6px;background:rgba(74,222,128,.1);border:1px solid rgba(74,222,128,.3);border-radius:30px;padding:4px 14px;font-size:.64rem;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--green);margin-bottom:12px;}
+.trust-tag-dot{width:6px;height:6px;border-radius:50%;background:var(--green);box-shadow:0 0 6px var(--green);animation:blink 1.5s ease-in-out infinite;}
+@keyframes blink{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.3;transform:scale(.6)}}
+.trust-title{font-family:'Playfair Display',serif;font-size:clamp(1.05rem,3.5vw,1.4rem);font-weight:900;color:var(--white);line-height:1.3;margin-bottom:16px;}
+.trust-title span{background:linear-gradient(90deg,var(--pink),var(--gold));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.trust-divider{width:44px;height:2px;margin:0 auto 18px;background:linear-gradient(90deg,var(--green),var(--cyan));border-radius:2px;}
+.trust-items{display:flex;flex-direction:column;gap:10px;margin-bottom:20px;text-align:left;}
+.trust-item{display:flex;align-items:flex-start;gap:10px;padding:11px 14px;border-radius:12px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.07);}
+.trust-item svg{width:18px;height:18px;flex-shrink:0;margin-top:1px;}
+.trust-item-text{font-size:.82rem;line-height:1.5;color:rgba(255,225,240,.8);}
+.trust-item-text strong{font-weight:700;}
+.item-green svg{color:var(--green);}
+.item-green .trust-item-text strong{color:var(--green);}
+.item-pink svg{color:var(--pink);}
+.item-pink .trust-item-text strong{color:var(--pink);}
+.item-gold svg{color:var(--gold);}
+.item-gold .trust-item-text strong{color:var(--gold);}
+.item-cyan svg{color:var(--cyan);}
+.item-cyan .trust-item-text strong{color:var(--cyan);}
+.trust-footer{font-size:.8rem;color:rgba(255,200,230,.5);line-height:1.6;margin-bottom:18px;}
+.trust-footer strong{color:var(--pink-soft);}
+.trust-btn{display:flex;align-items:center;justify-content:center;gap:8px;width:100%;padding:12px 16px;border-radius:12px;border:none;background:linear-gradient(135deg,#ff2d87,#c084fc);color:#fff;font-family:'Be Vietnam Pro',sans-serif;font-size:.85rem;font-weight:700;letter-spacing:.06em;cursor:pointer;transition:all .3s ease;text-decoration:none;}
+.trust-btn:hover{transform:translateY(-2px);box-shadow:0 8px 28px rgba(255,45,135,.4);}
+.trust-btn svg{width:17px;height:17px;flex-shrink:0;animation:chat-bounce .9s ease-in-out infinite;}
+@keyframes chat-bounce{0%,100%{transform:scale(1) rotate(0deg)}40%{transform:scale(1.22) rotate(-8deg)}70%{transform:scale(1.1) rotate(5deg)}}
 
-/* AVATAR */
-.corner-img{
-  position:fixed;
-  top:10px;
-  left:10px;
-  width:40px;
-  height:40px;
-  border-radius:50%;
-  z-index:10000;
-  box-shadow:0 0 10px red;
-}
+/* ══ PAGE ══ */
+.page{position:relative;z-index:10;width:100%;max-width:600px;margin:0 auto;padding:36px 14px 110px;}
 
-/* MAIN */
-.screen{
-  max-width:600px;
-  margin:auto;
-  padding:20px;
-  margin-top:90px;
-}
+/* HEADER */
+.site-header{text-align:center;margin-bottom:22px;}
+.dev-badge{display:inline-flex;align-items:center;gap:7px;background:linear-gradient(135deg,rgba(34,211,238,.12),rgba(74,222,128,.08));border:1px solid rgba(34,211,238,.3);border-radius:30px;padding:4px 14px;margin-bottom:12px;font-size:.64rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;}
+.dev-dot{width:6px;height:6px;border-radius:50%;background:var(--green);box-shadow:0 0 7px var(--green);animation:blink 1.5s ease-in-out infinite;flex-shrink:0;}
+.dev-badge span{background:linear-gradient(90deg,var(--cyan),var(--green));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.site-header h1{font-family:'Playfair Display',serif;font-size:1.9rem;font-weight:900;color:var(--white);text-shadow:0 0 40px rgba(255,45,135,.3);}
+.site-header h1 .gr{background:linear-gradient(90deg,var(--pink),var(--violet));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.site-header p{margin-top:6px;font-size:.78rem;color:rgba(255,200,230,.4);font-weight:300;letter-spacing:.05em;}
 
-.card{
-  background:#1a1a1a;
-  padding:20px;
-  border-radius:20px;
-}
+/* FLOAT ICONS */
+.float-icons{display:flex;justify-content:center;gap:16px;margin-bottom:22px;}
+.fi{width:48px;height:48px;border-radius:14px;display:flex;align-items:center;justify-content:center;position:relative;cursor:default;flex-shrink:0;}
+.fi svg{width:26px;height:26px;position:relative;z-index:1;filter:drop-shadow(0 0 5px currentColor);animation:fi-float ease-in-out infinite;}
+.fi-glow{position:absolute;inset:-3px;border-radius:16px;opacity:0;transition:opacity .3s;filter:blur(8px);z-index:0;}
+.fi:hover .fi-glow{opacity:.65;}
+.fi-flower{background:linear-gradient(135deg,rgba(255,45,135,.2),rgba(255,110,180,.1));border:1px solid rgba(255,45,135,.3);}
+.fi-flower svg{color:var(--pink);animation-duration:3s;}
+.fi-flower .fi-glow{background:rgba(255,45,135,.45);}
+.fi-file{background:linear-gradient(135deg,rgba(192,132,252,.2),rgba(140,0,200,.1));border:1px solid rgba(192,132,252,.3);}
+.fi-file svg{color:var(--violet);animation-duration:3.6s;animation-delay:-.6s;}
+.fi-file .fi-glow{background:rgba(192,132,252,.45);}
+.fi-chat{background:linear-gradient(135deg,rgba(34,211,238,.18),rgba(6,182,212,.08));border:1px solid rgba(34,211,238,.3);}
+.fi-chat svg{color:var(--cyan);animation-duration:4s;animation-delay:-1.2s;}
+.fi-chat .fi-glow{background:rgba(34,211,238,.4);}
+@keyframes fi-float{0%,100%{transform:translateY(0) rotate(-4deg) scale(1)}50%{transform:translateY(-8px) rotate(4deg) scale(1.06)}}
 
-/* INPUT */
-input{
-  width:100%;
-  padding:14px;
-  border:none;
-  border-radius:12px;
-  margin-top:10px;
-  background:#111;
-  color:#fff;
-}
+/* TABS */
+.tabs-wrap{display:flex;justify-content:center;margin-bottom:20px;}
+.tabs{display:flex;background:rgba(255,255,255,.04);border:1px solid rgba(255,110,180,.18);border-radius:50px;padding:4px;gap:3px;width:100%;}
+.tab-btn{flex:1;padding:9px 4px;border-radius:40px;border:none;background:transparent;font-family:'Be Vietnam Pro',sans-serif;font-size:.75rem;font-weight:600;color:rgba(255,200,230,.45);cursor:pointer;transition:all .3s ease;text-align:center;display:flex;align-items:center;justify-content:center;gap:4px;white-space:nowrap;}
+.tab-btn svg{width:13px;height:13px;flex-shrink:0;}
+.tab-btn:hover{color:var(--pink-soft);}
+.tab-btn.active.t1{background:linear-gradient(135deg,rgba(255,45,135,.3),rgba(255,110,180,.18));color:#ffb3d9;box-shadow:0 0 14px rgba(255,45,135,.18);}
+.tab-btn.active.t2{background:linear-gradient(135deg,rgba(192,132,252,.3),rgba(140,0,200,.18));color:#dab4fe;box-shadow:0 0 14px rgba(192,132,252,.22);}
+.tab-btn.active.t3{background:linear-gradient(135deg,rgba(253,230,138,.18),rgba(245,158,11,.15));color:#fde68a;box-shadow:0 0 14px rgba(253,230,138,.18);}
 
-/* BUTTON */
-button{
-  width:100%;
-  padding:14px;
-  margin-top:12px;
-  border:none;
-  border-radius:12px;
-  background:linear-gradient(135deg,#888,#555);
-  color:#fff;
-}
+/* PANELS */
+.panel{display:none;}
+.panel.active{display:block;animation:fade-up .4s ease both;}
+@keyframes fade-up{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:translateY(0)}}
+.panel-head{text-align:center;margin-bottom:18px;}
+.p-badge{display:inline-block;padding:3px 14px;border-radius:30px;font-size:.64rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;margin-bottom:8px;}
+.t1 .p-badge{background:rgba(255,45,135,.14);border:1px solid rgba(255,45,135,.28);color:var(--pink);}
+.t2 .p-badge{background:rgba(192,132,252,.14);border:1px solid rgba(192,132,252,.28);color:var(--violet);}
+.t3 .p-badge{background:rgba(253,230,138,.1);border:1px solid rgba(253,230,138,.22);color:var(--gold);}
+.panel-head h2{font-family:'Playfair Display',serif;font-size:1.2rem;font-weight:700;color:var(--white);}
+.panel-head p{font-size:.74rem;color:rgba(255,200,230,.38);margin-top:4px;}
 
-/* CONTACT */
-.contact-box{
-  margin-top:20px;
-  background:#1a1a1a;
-  padding:15px;
-  border-radius:15px;
-  text-align:center;
-}
-
-.contact-btns{
+/* ══ CARDS — 1 cột cố định, đều nhau ══ */
+.cards-grid{
   display:flex;
-  gap:10px;
-  margin-top:10px;
+  flex-direction:column;
+  gap:12px;
 }
 
-.contact-btns a{
-  flex:1;
-  padding:12px;
-  border-radius:10px;
-  text-decoration:none;
-  background:#444;
-  color:#fff;
-}
-
-/* GALLERY */
-.uchiha-gallery{
-  margin-top:20px;
-  display:grid;
-  grid-template-columns:repeat(2,1fr);
-  gap:10px;
-}
-
-.uchiha-gallery img{
-  width:100%;
-  height:130px;
-  object-fit:cover;
-  border-radius:12px;
-}
-
-.user-img{
-  grid-column:span 2;
-  height:160px;
-  border:2px solid #fff;
-}
-
-/* POPUP */
-.popup{
-  position:fixed;
-  inset:0;
-  background:rgba(0,0,0,.9);
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  z-index:99999;
-}
-
-.popup-box{
-  background:#1a1a1a;
-  padding:20px;
-  border-radius:20px;
-  width:90%;
-  max-width:350px;
-  text-align:center;
-}
-
-/* GIFT */
-.gift{
-  font-size:40px;
-  animation:spin 2s linear infinite;
-}
-
-@keyframes spin{
-  100%{transform:rotate(360deg)}
-}
-
-/* MARQUEE */
-.marquee{
-  position:fixed;
-  bottom:0;
-  width:100%;
-  height:40px;
-  background:#111;
-  display:flex;
-  align-items:center;
+.prod-card{
+  background:linear-gradient(145deg,rgba(38,0,62,.92),rgba(16,0,34,.95));
+  border-radius:16px;
   overflow:hidden;
+  position:relative;
+  /* KHÔNG dùng transform scale hover để tránh lệch khung */
+  transition:box-shadow .3s ease;
+  width:100%;
 }
+.prod-card::before{content:'';position:absolute;inset:0;border-radius:16px;padding:1px;-webkit-mask:linear-gradient(#fff 0 0) content-box,linear-gradient(#fff 0 0);-webkit-mask-composite:xor;mask-composite:exclude;opacity:.4;transition:opacity .3s;}
+.t1 .prod-card::before{background:linear-gradient(135deg,var(--neon-pink),transparent 55%,var(--violet));}
+.t2 .prod-card::before{background:linear-gradient(135deg,var(--violet),transparent 55%,var(--neon-pink));}
+.t3 .prod-card::before{background:linear-gradient(135deg,var(--gold),transparent 55%,var(--neon-pink));}
+.prod-card:hover::before{opacity:1;}
+.t1 .prod-card:hover{box-shadow:0 8px 30px rgba(255,45,135,.18);}
+.t2 .prod-card:hover{box-shadow:0 8px 30px rgba(192,132,252,.18);}
+.t3 .prod-card:hover{box-shadow:0 8px 30px rgba(253,230,138,.14);}
 
-.marquee span{
-  padding-left:100%;
-  animation:run 12s linear infinite;
-}
+/* stripe top */
+.card-stripe{height:2.5px;width:100%;}
+.t1 .card-stripe{background:linear-gradient(90deg,var(--neon-pink),var(--violet),var(--neon-pink));background-size:200%;animation:stripe-move 3s linear infinite;}
+.t2 .card-stripe{background:linear-gradient(90deg,var(--violet),var(--neon-pink),var(--violet));background-size:200%;animation:stripe-move 3.5s linear infinite;}
+.t3 .card-stripe{background:linear-gradient(90deg,var(--gold),#f97316,var(--gold));background-size:200%;animation:stripe-move 3s linear infinite;}
+@keyframes stripe-move{from{background-position:0% 0}to{background-position:200% 0}}
 
-@keyframes run{
-  100%{transform:translateX(-100%)}
+.card-body{padding:13px 16px 0;}
+
+/* header row: số + tên file */
+.card-header-row{display:flex;align-items:center;gap:8px;margin-bottom:10px;}
+.card-num{font-size:.6rem;font-weight:700;letter-spacing:.1em;opacity:.35;flex-shrink:0;}
+.t1 .card-num{color:var(--pink);}
+.t2 .card-num{color:var(--violet);}
+.t3 .card-num{color:var(--gold);}
+.card-file-name{font-size:.88rem;font-weight:700;color:var(--white);flex:1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+
+.card-row{display:flex;align-items:flex-start;gap:7px;margin-bottom:7px;}
+.row-icon{width:15px;height:15px;flex-shrink:0;margin-top:1px;}
+.card-row .lbl{font-size:.72rem;font-weight:700;flex-shrink:0;}
+.card-row .val{font-size:.8rem;color:rgba(255,220,242,.78);line-height:1.4;}
+.t1 .card-row .lbl,.t1 .row-icon{color:var(--pink);}
+.t2 .card-row .lbl,.t2 .row-icon{color:var(--violet);}
+.t3 .card-row .lbl,.t3 .row-icon{color:var(--gold);}
+
+.card-sep{height:1px;background:linear-gradient(90deg,transparent,rgba(255,110,180,.12),transparent);margin:6px 0;}
+
+/* bottom row: giá + usage + btn — nằm ngang */
+.card-bottom{
+  display:flex;align-items:center;gap:10px;
+  padding:10px 16px 12px;
+  flex-wrap:nowrap;
 }
+.price-block{display:flex;flex-direction:column;gap:1px;min-width:64px;}
+.price-lbl{font-size:.58rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;opacity:.45;}
+.price-val{font-family:'Playfair Display',serif;font-size:1rem;font-weight:700;white-space:nowrap;}
+.t1 .price-lbl,.t1 .price-val{color:var(--pink);}
+.t2 .price-lbl,.t2 .price-val{color:var(--violet);}
+.t3 .price-lbl,.t3 .price-val{color:var(--gold);}
+
+.usage-chip{display:flex;align-items:center;gap:4px;font-size:.68rem;font-weight:600;white-space:nowrap;flex-shrink:0;}
+.usage-chip svg{width:12px;height:12px;flex-shrink:0;}
+.t1 .usage-chip{color:rgba(255,179,217,.65);}
+.t2 .usage-chip{color:rgba(192,132,252,.65);}
+.t3 .usage-chip{color:rgba(253,230,138,.65);}
+
+.zalo-btn{
+  display:flex;align-items:center;justify-content:center;gap:6px;
+  margin-left:auto;flex-shrink:0;
+  padding:8px 13px;border-radius:10px;border:none;
+  font-family:'Be Vietnam Pro',sans-serif;font-size:.75rem;font-weight:700;
+  cursor:pointer;text-decoration:none;
+  transition:box-shadow .25s ease,opacity .2s;
+  white-space:nowrap;
+}
+.zalo-btn svg{width:15px;height:15px;flex-shrink:0;animation:chat-bounce .9s ease-in-out infinite;}
+.zalo-btn:hover{opacity:.88;}
+.t1 .zalo-btn{background:linear-gradient(135deg,#ff2d87,#ff6eb4);color:#fff;box-shadow:0 3px 14px rgba(255,45,135,.3);}
+.t2 .zalo-btn{background:linear-gradient(135deg,#7c3aed,#c084fc);color:#fff;box-shadow:0 3px 14px rgba(124,58,237,.3);}
+.t3 .zalo-btn{background:linear-gradient(135deg,#d97706,#fde68a);color:#1a0a00;box-shadow:0 3px 14px rgba(217,119,6,.3);}
+
+/* ══ HAMBURGER ══ */
+.hamburger{position:fixed;bottom:24px;left:50%;transform:translateX(-50%);z-index:150;width:52px;height:52px;border-radius:16px;border:1px solid rgba(255,110,180,.38);cursor:pointer;background:linear-gradient(135deg,rgba(255,45,135,.2),rgba(192,132,252,.16));backdrop-filter:blur(14px);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:5px;box-shadow:0 6px 28px rgba(255,45,135,.18);transition:all .3s ease;}
+.hamburger:hover{box-shadow:0 10px 36px rgba(255,45,135,.3);}
+.hamburger.open{background:linear-gradient(135deg,rgba(255,45,135,.34),rgba(192,132,252,.26));border-color:rgba(255,110,180,.6);}
+.ham-line{width:21px;height:2px;border-radius:2px;background:linear-gradient(90deg,var(--pink),var(--violet));transition:all .35s cubic-bezier(.22,1,.36,1);transform-origin:center;}
+.hamburger.open .ham-line:nth-child(1){transform:translateY(7px) rotate(45deg);}
+.hamburger.open .ham-line:nth-child(2){opacity:0;transform:scaleX(0);}
+.hamburger.open .ham-line:nth-child(3){transform:translateY(-7px) rotate(-45deg);}
+
+/* ══ SOCIAL DRAWER ══ */
+.social-drawer{position:fixed;bottom:86px;left:50%;transform:translateX(-50%) translateY(16px);z-index:149;display:flex;flex-direction:column;align-items:center;gap:9px;opacity:0;pointer-events:none;transition:all .38s cubic-bezier(.22,1,.36,1);width:calc(100% - 32px);max-width:340px;}
+.social-drawer.open{opacity:1;pointer-events:all;transform:translateX(-50%) translateY(0);}
+
+.soc-btn{display:flex;align-items:center;gap:11px;padding:11px 18px;border-radius:13px;text-decoration:none;font-size:.82rem;font-weight:700;backdrop-filter:blur(18px);border:1px solid;width:100%;position:relative;overflow:hidden;transition:transform .22s ease,box-shadow .22s ease;}
+.soc-btn::before{content:'';position:absolute;inset:0;opacity:0;transition:opacity .3s;background:rgba(255,255,255,.07);}
+.soc-btn:hover::before{opacity:1;}
+.soc-btn:hover{transform:translateX(4px);}
+.soc-btn .soc-icon{width:22px;height:22px;flex-shrink:0;}
+.soc-btn span{flex:1;}
+.soc-btn .soc-arrow{width:13px;height:13px;opacity:.38;flex-shrink:0;}
+.social-drawer.open .soc-btn:nth-child(1){transition-delay:.04s}
+.social-drawer.open .soc-btn:nth-child(2){transition-delay:.08s}
+.social-drawer.open .soc-btn:nth-child(3){transition-delay:.12s}
+.social-drawer.open .soc-btn:nth-child(4){transition-delay:.16s}
+.social-drawer.open .soc-btn:nth-child(5){transition-delay:.2s}
+.soc-discord{background:rgba(88,101,242,.18);border-color:rgba(88,101,242,.4);color:#7289da;}
+.soc-discord:hover{box-shadow:0 6px 24px rgba(88,101,242,.28);}
+.soc-telegram{background:rgba(0,136,204,.18);border-color:rgba(0,136,204,.4);color:#2aabee;}
+.soc-telegram:hover{box-shadow:0 6px 24px rgba(0,136,204,.28);}
+.soc-facebook{background:rgba(24,119,242,.18);border-color:rgba(24,119,242,.4);color:#4f9cf9;}
+.soc-facebook:hover{box-shadow:0 6px 24px rgba(24,119,242,.28);}
+.soc-zalo{background:rgba(0,104,255,.18);border-color:rgba(0,104,255,.4);color:#5ba4ff;}
+.soc-zalo:hover{box-shadow:0 6px 24px rgba(0,104,255,.28);}
+.soc-tiktok{background:rgba(255,0,80,.14);border-color:rgba(255,0,80,.35);color:#ff4d6d;}
+.soc-tiktok:hover{box-shadow:0 6px 24px rgba(255,0,80,.22);}
+
+.drawer-backdrop{position:fixed;inset:0;z-index:148;display:none;}
+.drawer-backdrop.open{display:block;}
 </style>
 </head>
-
 <body>
 
-<div class="headlock">Bunora VN</div>
+<div class="aurora"></div>
+<div class="grain"></div>
+<div class="orbs"><div class="orb orb-1"></div><div class="orb orb-2"></div><div class="orb orb-3"></div></div>
+<canvas id="stars"></canvas>
+<canvas id="snow"></canvas>
+<div class="crystals" id="crystals"></div>
 
-<img src="https://sf-static.upanhlaylink.com/img/image_20260330e84072be907c21ceb868972c94a9d7ec.jpg" class="corner-img">
-
-<!-- POPUP -->
-<div class="popup" id="popup">
-  <div class="popup-box">
-    <div class="gift">🎁</div>
-    <h3>FREE KEY VIP</h3>
-
-    <p style="text-align:left">
-1. Sao chép link<br>
-2. Vượt link<br>
-3. Lấy key cuối trang
-    </p>
-
-    <input id="link" value="https://link4m.net/5FcieDl" readonly>
-<button onclick="copyLink()">Sao chép link</button>
-<button onclick="closePopup()">Đóng ngay</button>
+<!-- POPUP CHÀO -->
+<div class="overlay" id="overlay">
+  <div class="popup">
+    <button class="btn-close" onclick="closePopup()">
+      <svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+    </button>
+    <div class="popup-flower">
+      <svg width="48" height="48" viewBox="0 0 52 52" fill="none">
+        <ellipse cx="26" cy="12" rx="6" ry="10" fill="#ff6eb4" opacity=".9"/>
+        <ellipse cx="26" cy="12" rx="6" ry="10" fill="#ff6eb4" opacity=".9" transform="rotate(45 26 26)"/>
+        <ellipse cx="26" cy="12" rx="6" ry="10" fill="#c084fc" opacity=".85" transform="rotate(90 26 26)"/>
+        <ellipse cx="26" cy="12" rx="6" ry="10" fill="#c084fc" opacity=".85" transform="rotate(135 26 26)"/>
+        <ellipse cx="26" cy="12" rx="6" ry="10" fill="#ff6eb4" opacity=".75" transform="rotate(180 26 26)"/>
+        <ellipse cx="26" cy="12" rx="6" ry="10" fill="#ff6eb4" opacity=".75" transform="rotate(225 26 26)"/>
+        <ellipse cx="26" cy="12" rx="6" ry="10" fill="#c084fc" opacity=".8" transform="rotate(270 26 26)"/>
+        <ellipse cx="26" cy="12" rx="6" ry="10" fill="#c084fc" opacity=".8" transform="rotate(315 26 26)"/>
+        <circle cx="26" cy="26" r="7" fill="#fde68a"/>
+        <circle cx="26" cy="26" r="4" fill="#f97316"/>
+      </svg>
+    </div>
+    <p class="popup-shop">✦ Thông Báo ✦</p>
+    <div class="popup-divider"></div>
+    <div class="notice-block">
+      <div class="notice-line line-1"><strong>Shop Bi Enter</strong> Hỗ Trợ Kéo Tâm<br>An Toàn &nbsp;·&nbsp; Uy Tín &nbsp;·&nbsp; Chất Lượng</div>
+      <div class="notice-line line-2">Bảng Giá gồm loại &nbsp;<span class="t1c">Cơ Bản</span>&nbsp; và &nbsp;<span class="t2c">Nâng Cao</span>&nbsp; và &nbsp;<span class="t3c">Premium</span></div>
+      <div class="notice-line line-3">Khi chọn được gói ưng ý thì hãy nói với <strong>Bi Enter</strong> nhé</div>
+    </div>
+    <div class="cbar-bg"><div class="cbar" id="cbar"></div></div>
+    <p class="clabel" id="clabel">Tự động đóng sau 5 giây...</p>
   </div>
 </div>
 
-<div class="screen">
+<!-- POPUP CAM KẾT -->
+<div class="trust-overlay" id="trustOverlay" onclick="closeTrust(event)">
+  <div class="trust-popup">
+    <button class="trust-close" onclick="closeTrustBtn()">
+      <svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+    </button>
+    <div class="trust-icon">
+      <svg width="58" height="58" viewBox="0 0 64 64" fill="none">
+        <path d="M32 6L10 16v16c0 13 9.8 24.7 22 28 12.2-3.3 22-15 22-28V16L32 6z" fill="rgba(74,222,128,.12)" stroke="#4ade80" stroke-width="2"/>
+        <path d="M22 32l7 7 13-13" stroke="#4ade80" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+        <circle cx="32" cy="32" r="26" stroke="rgba(74,222,128,.2)" stroke-width="1" stroke-dasharray="4 3"/>
+      </svg>
+    </div>
+    <div class="trust-tag"><div class="trust-tag-dot"></div>Cam Kết Chất Lượng</div>
+    <h2 class="trust-title">Bạn Đang Lo Sợ Về<br><span>Files Không Tác Dụng?</span></h2>
+    <div class="trust-divider"></div>
+    <div class="trust-items">
+      <div class="trust-item item-green">
+        <svg viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg>
+        <span class="trust-item-text"><strong>An Toàn Đầy Đủ</strong> — Mọi files đều được kiểm tra kỹ trước khi giao.</span>
+      </div>
+      <div class="trust-item item-cyan">
+        <svg viewBox="0 0 20 20" fill="currentColor"><path d="M9 4.804A7.968 7.968 0 005.5 4c-1.255 0-2.443.29-3.5.804v10A7.969 7.969 0 015.5 14c1.669 0 3.218.51 4.5 1.385A7.962 7.962 0 0114.5 14c1.255 0 2.443.29 3.5.804v-10A7.968 7.968 0 0014.5 4c-1.255 0-2.443.29-3.5.804V12a1 1 0 11-2 0V4.804z"/></svg>
+        <span class="trust-item-text"><strong>Hướng Dẫn Chi Tiết</strong> — Có hướng dẫn cài từng bước rõ ràng khi mua.</span>
+      </div>
+      <div class="trust-item item-pink">
+        <svg viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M4 4a2 2 0 00-2 2v4a2 2 0 002 2V6h10a2 2 0 00-2-2H4zm2 6a2 2 0 012-2h8a2 2 0 012 2v4a2 2 0 01-2 2H8a2 2 0 01-2-2v-4zm6 4a2 2 0 100-4 2 2 0 000 4z" clip-rule="evenodd"/></svg>
+        <span class="trust-item-text"><strong>Hoàn Tiền 100%</strong> — Files không tác dụng, shop hoàn tiền toàn bộ.</span>
+      </div>
+      <div class="trust-item item-gold">
+        <svg viewBox="0 0 20 20" fill="currentColor"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+        <span class="trust-item-text"><strong>Hãy Đặt Niềm Tin</strong> — Shop Bi Enter luôn đặt uy tín lên hàng đầu.</span>
+      </div>
+    </div>
+    <p class="trust-footer">Bên <strong>Shop Bi Enter</strong> cam kết an toàn đầy đủ, có hướng dẫn chi tiết.<br>Không tác dụng → <strong>Hoàn Tiền 100%</strong></p>
+    <a class="trust-btn" href="https://zalo.me/0852446848" target="_blank" rel="noopener">
+      <svg viewBox="0 0 20 20" fill="none"><rect x="2" y="3" width="16" height="11" rx="3" fill="rgba(255,255,255,.12)" stroke="currentColor" stroke-width="1.7"/><circle cx="6.5" cy="8.5" r="1.2" fill="currentColor"/><circle cx="10" cy="8.5" r="1.2" fill="currentColor"/><circle cx="13.5" cy="8.5" r="1.2" fill="currentColor"/><path d="M5 14l-2 3h6l-1.5-3" fill="rgba(255,255,255,.18)" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/></svg>
+      Nhắn Zalo Shop Ngay
+    </a>
+  </div>
+</div>
 
-  <!-- LOGIN -->
-  <div class="card">
-    <h3>Đăng nhập key</h3>
-    <input id="key" placeholder="Nhập key...">
-    <button onclick="login()">Đăng nhập</button>
-    <p id="status"></p>
+<!-- PAGE -->
+<div class="page">
+  <div class="site-header">
+    <div class="dev-badge"><div class="dev-dot"></div><span>Developer · Shop Bi Enter</span></div>
+    <h1>Bảng Giá <span class="gr">Sản Phẩm</span></h1>
+    <p>Chọn gói phù hợp · Nhắn Zalo khi đã chọn được 🌸</p>
   </div>
 
-  <!-- CONTACT -->
-  <div class="contact-box">
-    <h4>Liên hệ</h4>
-    <div class="contact-btns">
-      <a href="https://zalo.me/0877660792" target="_blank">Zalo</a>
-      <a href="https://www.facebook.com/share/1BZKgdgkB6/?mibextid=wwXIfr" target="_blank">Facebook</a>
+  <div class="float-icons">
+    <div class="fi fi-flower"><div class="fi-glow"></div>
+      <svg viewBox="0 0 32 32" fill="none">
+        <ellipse cx="16" cy="5" rx="4" ry="7" fill="currentColor" opacity=".9"/>
+        <ellipse cx="16" cy="5" rx="4" ry="7" fill="currentColor" opacity=".8" transform="rotate(60 16 16)"/>
+        <ellipse cx="16" cy="5" rx="4" ry="7" fill="currentColor" opacity=".85" transform="rotate(120 16 16)"/>
+        <ellipse cx="16" cy="5" rx="4" ry="7" fill="currentColor" opacity=".9" transform="rotate(180 16 16)"/>
+        <ellipse cx="16" cy="5" rx="4" ry="7" fill="currentColor" opacity=".8" transform="rotate(240 16 16)"/>
+        <ellipse cx="16" cy="5" rx="4" ry="7" fill="currentColor" opacity=".85" transform="rotate(300 16 16)"/>
+        <circle cx="16" cy="16" r="5" fill="#fde68a"/>
+        <circle cx="16" cy="16" r="3" fill="#f97316"/>
+      </svg>
+    </div>
+    <div class="fi fi-file"><div class="fi-glow"></div>
+      <svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M8 4h10l6 6v18H8V4z" fill="rgba(192,132,252,.15)"/>
+        <path d="M18 4v6h6" fill="none"/>
+        <line x1="11" y1="14" x2="21" y2="14"/>
+        <line x1="11" y1="18" x2="21" y2="18"/>
+        <line x1="11" y1="22" x2="17" y2="22"/>
+      </svg>
+    </div>
+    <div class="fi fi-chat"><div class="fi-glow"></div>
+      <svg viewBox="0 0 32 32" fill="none">
+        <rect x="3" y="4" width="26" height="18" rx="5" fill="rgba(34,211,238,.15)" stroke="currentColor" stroke-width="1.8"/>
+        <circle cx="10" cy="13" r="2" fill="currentColor"/>
+        <circle cx="16" cy="13" r="2" fill="currentColor"/>
+        <circle cx="22" cy="13" r="2" fill="currentColor"/>
+        <path d="M8 22l-4 5h10l-2-5" fill="rgba(34,211,238,.25)" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/>
+      </svg>
     </div>
   </div>
 
-  <!-- GALLERY -->
-  <div class="uchiha-gallery">
-    <img src="https://sf-static.upanhlaylink.com/img/image_20260330cce11275b7f15c018d7b96409b8179fb.jpg">
-    <img src="https://sf-static.upanhlaylink.com/img/image_202603308b8624cd83fabd71aa501b09036e9113.jpg">
-    <img src="https://sf-static.upanhlaylink.com/img/image_20260330a3758c387bb3f384f69754c7958599f5.jpg">
-    <img src="https://sf-static.upanhlaylink.com/img/image_20260330b0d6e271441a65aa9b55d916219c71f7.jpg">
-    <img src="https://sf-static.upanhlaylink.com/img/image_202603306032fc007b31c0b19cce1822adf5e002.jpg" class="user-img">
+  <div class="tabs-wrap">
+    <div class="tabs">
+      <button class="tab-btn t1 active" onclick="switchTab('t1',this)">
+        <svg viewBox="0 0 20 20" fill="currentColor"><path d="M10 2c-.5 0-1 .4-1.3.8L7.2 5H5a2 2 0 00-2 2v8a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2.2L11.3 2.8C11 2.4 10.5 2 10 2z"/></svg>
+        Thường
+      </button>
+      <button class="tab-btn t2" onclick="switchTab('t2',this)">
+        <svg viewBox="0 0 20 20" fill="currentColor"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+        Nâng Cao
+      </button>
+      <button class="tab-btn t3" onclick="switchTab('t3',this)">
+        <svg viewBox="0 0 20 20" fill="currentColor"><path d="M5 3a2 2 0 00-2 2v2a2 2 0 002 2h2a2 2 0 002-2V5a2 2 0 00-2-2H5zM5 11a2 2 0 00-2 2v2a2 2 0 002 2h2a2 2 0 002-2v-2a2 2 0 00-2-2H5zM11 5a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V5zM14 11a1 1 0 011 1v1h1a1 1 0 110 2h-1v1a1 1 0 11-2 0v-1h-1a1 1 0 110-2h1v-1a1 1 0 011-1z"/></svg>
+        Premium
+      </button>
+    </div>
   </div>
 
+  <div class="panel t1 active" id="panel-t1">
+    <div class="panel-head"><span class="p-badge">Loại Thường</span><h2>Gói Cơ Bản</h2><p>Tối đa 5 sản phẩm</p></div>
+    <div class="cards-grid" id="grid-t1"></div>
+  </div>
+  <div class="panel t2" id="panel-t2">
+    <div class="panel-head"><span class="p-badge">Loại Nâng Cao</span><h2>Gói Nâng Cao</h2><p>Tối đa 10 sản phẩm</p></div>
+    <div class="cards-grid" id="grid-t2"></div>
+  </div>
+  <div class="panel t3" id="panel-t3">
+    <div class="panel-head"><span class="p-badge">Loại Premium</span><h2>Gói Premium</h2><p>Tối đa 20 sản phẩm</p></div>
+    <div class="cards-grid" id="grid-t3"></div>
+  </div>
 </div>
 
-<div class="marquee">
+<div class="drawer-backdrop" id="drawerBackdrop" onclick="toggleMenu()"></div>
 
+<!-- SOCIAL DRAWER -->
+<div class="social-drawer" id="socialDrawer">
+  <a class="soc-btn soc-discord" href="https://zalo.me/g/burmlotx4jodh3wcdddp" target="_blank" rel="noopener">
+    <svg class="soc-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M20.317 4.37a19.791 19.791 0 00-4.885-1.515.074.074 0 00-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 00-5.487 0 12.64 12.64 0 00-.617-1.25.077.077 0 00-.079-.037A19.736 19.736 0 003.677 4.37a.07.07 0 00-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 00.031.057 19.9 19.9 0 005.993 3.03.078.078 0 00.084-.028c.462-.63.874-1.295 1.226-1.994a.076.076 0 00-.041-.106 13.107 13.107 0 01-1.872-.892.077.077 0 01-.008-.128 10.2 10.2 0 00.372-.292.074.074 0 01.077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 01.078.01c.12.098.246.198.373.292a.077.077 0 01-.006.127 12.299 12.299 0 01-1.873.892.077.077 0 00-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 00.084.028 19.839 19.839 0 006.002-3.03.077.077 0 00.032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 00-.031-.03zM8.02 15.33c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.956-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.956 2.418-2.157 2.418zm7.975 0c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.955-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.946 2.418-2.157 2.418z"/></svg>
+    <span>Box Zalo</span>
+    <svg class="soc-arrow" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"/></svg>
+  </a>
+  <a class="soc-btn soc-telegram" href="https://t.me/Bi_no01" target="_blank" rel="noopener">
+    <svg class="soc-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M11.944 0A12 12 0 000 12a12 12 0 0012 12 12 12 0 0012-12A12 12 0 0012 0a12 12 0 00-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 01.171.325c.016.093.036.306.02.472-.18 1.898-.96 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/></svg>
+    <span>Telegram</span>
+    <svg class="soc-arrow" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"/></svg>
+  </a>
+  <a class="soc-btn soc-facebook" href="https://www.facebook.com/share/1MVGsb4PXb/?mibextid=wwXIfr" target="_blank" rel="noopener">
+    <svg class="soc-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+    <span>Facebook</span>
+    <svg class="soc-arrow" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"/></svg>
+  </a>
+  <a class="soc-btn soc-zalo" href="https://zalo.me/0877660792" target="_blank" rel="noopener">
+    <svg class="soc-icon" viewBox="0 0 24 24" fill="none">
+      <rect width="24" height="24" rx="7" fill="#0068ff" opacity=".22"/>
+      <path d="M4.5 15.5c-.3-.9-.5-1.9-.5-3C4 7.8 7.6 4 12 4s8 3.8 8 8.5c0 4.7-3.6 8.5-8 8.5-1.3 0-2.5-.3-3.6-.9L4 21l.5-5.5z" stroke="#5ba4ff" stroke-width="1.6" stroke-linejoin="round"/>
+      <text x="7.5" y="14.5" font-family="Arial" font-weight="900" font-size="7.5" fill="#5ba4ff">Zalo</text>
+    </svg>
+    <span>Admin Bi Enter</span>
+    <svg class="soc-arrow" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"/></svg>
+  </a>
+  <a class="soc-btn soc-tiktok" href="https://www.tiktok.com/@baonguyentrumfile?_r=1&_t=ZS-98w3cFyaLOn" target="_blank" rel="noopener">
+    <svg class="soc-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-2.88 2.5 2.89 2.89 0 01-2.89-2.89 2.89 2.89 0 012.89-2.89c.28 0 .54.04.79.1V9.01a6.33 6.33 0 00-.79-.05 6.34 6.34 0 00-6.34 6.34 6.34 6.34 0 006.34 6.34 6.34 6.34 0 006.33-6.34V8.69a8.18 8.18 0 004.78 1.52V6.76a4.85 4.85 0 01-1.01-.07z"/></svg>
+    <span>TikTok</span>
+    <svg class="soc-arrow" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"/></svg>
+  </a>
 </div>
 
-<script src="keys.js"></script>
+<button class="hamburger" id="hamburger" onclick="toggleMenu()">
+  <div class="ham-line"></div>
+  <div class="ham-line"></div>
+  <div class="ham-line"></div>
+</button>
+
 <script>
-function copyLink(){
-  var input = document.getElementById("link");
-  input.select();
-  input.setSelectionRange(0,99999); // cho mobile
-  document.execCommand("copy");
-  alert("Đã copy link!");
+const ZALO='https://zalo.me/0877660792';
+
+function toggleMenu(){
+  document.getElementById('hamburger').classList.toggle('open');
+  document.getElementById('socialDrawer').classList.toggle('open');
+  document.getElementById('drawerBackdrop').classList.toggle('open');
+}
+function openTrust(e){e.preventDefault();document.getElementById('trustOverlay').classList.add('show');}
+function closeTrust(e){if(e.target===document.getElementById('trustOverlay'))closeTrustBtn();}
+function closeTrustBtn(){document.getElementById('trustOverlay').classList.remove('show');}
+
+const svgFile=`<svg class="row-icon" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 3h8l4 4v10H4V3z"/><path d="M12 3v4h4"/><line x1="6" y1="10" x2="14" y2="10"/><line x1="6" y1="13" x2="14" y2="13"/></svg>`;
+const svgZap=`<svg class="row-icon" viewBox="0 0 20 20" fill="currentColor"><path d="M11 2L4 12h6l-1 6 7-10h-6l1-6z"/></svg>`;
+const svgRepeat=`<svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 10a6 6 0 016-6h4"/><path d="M16 4l2 2-2 2"/><path d="M16 10a6 6 0 01-6 6H6"/><path d="M4 16l-2-2 2-2"/></svg>`;
+const svgChat=`<svg viewBox="0 0 20 20" fill="none"><rect x="2" y="3" width="16" height="11" rx="3" fill="rgba(255,255,255,.12)" stroke="currentColor" stroke-width="1.7"/><circle cx="6.5" cy="8.5" r="1.2" fill="currentColor"/><circle cx="10" cy="8.5" r="1.2" fill="currentColor"/><circle cx="13.5" cy="8.5" r="1.2" fill="currentColor"/><path d="M5 14l-2 3h6l-1.5-3" fill="rgba(255,255,255,.15)" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/></svg>`;
+
+const products={
+  t1:[
+    {file:'LockHead',   td:'Kéo Nhẹ Khoá Đầu 40%',           usage:'50k 1 Ob',price:'Liên hệ'},
+    {file:'Config Premium',   td:'Kéo Tâm Nhẹ Không Bị Nặng', usage:'50k 1 Ob',price:'Liên hệ'},
+    {file:'Data Game',        td:'Tâm Bám Đầu Fix Rung Êm Tâm',      usage:'80k 1 ob',  price:'Liên hệ'},
+    {file:'Fix Rung Tâm', td:'Giảm Rung Tâm - Bám Đầu',     usage:'60k 1 ob',price:'Liên hệ'},
+    {file:'Unlock Cảm Ứng',   td:'Sẽ Mở Khoá Tính Năng Cảm Ứng Giúp Nhạy Hơn',  usage:'80k Vĩnh Viễn',   price:'Liên hệ'},
+  ],
+  t2:[
+    {file:'Aimlock Nâng Cao', td:'Bám Đầu Nhanh & Chính Xác',  usage:'150k Vĩnh Viễn',price:'Liên hệ'},
+    {file:'Data Định Vị & Nhẹ Tâm',      td:'Hiển Thị Định Vị Súng Địch & Khi Kéo Tâm Sẽ Nhẹ',usage:'100k 1 ob',price:'Liên hệ'},
+    {file:'Config Pro',        td:'Kéo Tâm Ổn Định & Tối Ưu Mạng & Mượt Máy ',         usage:'150k Vĩnh Viễn',  price:'Liên hệ'},
+    {file:'Data Config ',    td:'Tối Ưu Data Game & Data Máy An Toàn Sử Dụng',      usage:'200k Vĩnh Viễn ',price:'Liên hệ'},
+    {file:'Data Bám Đầu ',      td:'Khi Kéo Tâm Data Bám Đầu Sẽ Được Kích Hoạt Cơ Chế Bám Đầu 80%',   usage:'150k Vĩnh Viễn',price:'Liên hệ'},
+    {file:'Etracly',   td:'Etracly Là 1 Loại Của Aimlock Nhưng Bản Này Sẽ Tăng Nhạy + Bám Đầu + Khoá Đầu Tỷ Lệ Cao Và Antiband Rất Cao',        usage:'200k Vĩnh Viễn',  price:'Liên hệ'},
+    {file:'Tối Ưu Máy ',    td:'Khi Sử Dụng Bản Này Thì Sẽ Tối Ưu Máy + Kéo Tâm Ổn Định Hơn Máy Mượt Hơn Fix Lag Ổn Định',    usage:'150k Vĩnh Viễn',price:'Liên hệ'},
+    {file:'Sensitivity',       td:'Giúp Tăng Nhạy Và Tâm Ổn Định Không Bị Giật Tâm Khi Kéo ',        usage:'130k 1 ob',   price:'Liên hệ'},
+    {file:'Aim Profile',     td:'Khi Solo & Đi Rank Tâm Súng Sẽ Bắt Vào Đầu Địch Rõ Rệt Và Bám Đầu Tỷ Lệ Cao',usage:'200k Vĩnh Viễn',price:'Liên hệ'},
+    {file:'Định Vị & Aimlock ',     td:'Khi Đi Rank Bản Này Sẽ Hỗ Trợ Về Phần Định Vị Địch Antiband Rất Cao ',     usage:'150k 1 ob',  price:'Liên hệ'},
+  ],
+  t3:[
+    {file:'Super Head',    td:'Là 1 Loại Khi Kéo Tâm Thì Tâm Súng Sẽ Khoá Đầu Chặt Hơn Và Tâm Súng Không Bị Giật ',usage:'250k Vĩnh Viễn',price:'Liên hệ'},
+    {file:'Data Game Premium',   td:'Loại Này Sẽ Hỗ Trợ Về Tâm Súng Giúp Bắt Tâm Chính Xác Hơn Antiband',       usage:'200k Vĩnh Viễn',price:'Liên hệ'},
+    {file:'Headlock Ultra',        td:'Khoá Đầu 80% Tâm Súng Chính Xác 70% Fix Rung 90% Tâm Êm 70% Nhẹ Tâm 90% Antiband Đi Rank Đi Phòng Hợp Lí',      usage:'350k Vĩnh Viễn',price:'Liên hệ'},
+    {file:'Đạn Thẳng + AimLock ', td:'Đạn Không Bị Nở Và Hỗ Trợ Tầm 90% Đạn Đầu Không Bị Nở Ở Đạn Cuối thì Có Nở Ra Chống Làm Ra Band Acc Và Kéo Tâm Sẽ Khoá Đầu Địch 100% ',     usage:'300k Vĩnh Viễn',price:'Liên hệ'},
+    {file:'Config Infinty Premium',   td:'Giúp Mượt Máy Và Tối Ưu Game Làm Giảm Lag Máy + Mượt Mà Khi Xử Lý Tình Huống Giao Tranh ',  usage:'250k Vĩnh Viễn',price:'Liên hệ'},
+    {file:'Drag Headlock',td:'Dạng Này Hỗ Trợ Tác Dụng Cực Kì Là Cao Và 40% Aim Đầu Khi Kéo, Tâm Không Bị Rung Khi Kéo Tâm ',            usage:'400k Vĩnh Viễn',price:'Liên hệ'},
+    {file:'Aim Cổ',       td:'Tự Động Ghim Cổ Khi Nhấn Nút Bắn ',         usage:'400k Vĩnh Viễn',price:'Liên hệ'},
+    {file:'Aim Body',  td:'Sử Dụng Cho Android & Ios Tự Động Ghim Người Full Đỏ Antiband Khi Đi Phòng + Rank ',           usage:'400k Vĩnh Viễn',price:'Liên hệ'},
+    {file:'Aim Drag',    td:'Bản Này Khi Kéo Tâm Sẽ Headshot 2 Bên Góc Đầu Địch',      usage:'300k Vĩnh Viễn',price:'Liên hệ'},
+    {file:'Aim Assistivetouch',      td:'Giúp Nhạy Tâm Và Bám Đầu + Fix Lố Đầu',        usage:'250k Vĩnh Viễn',price:'Liên hệ'},
+    {file:'Nhẹ Tâm + Định Vị ',  td:'Khi Kéo Thì Nó Sẽ Headshot Ở Gần Cổ Và Antiband Định Vị Sẽ Thấy Trang Phục Của Địch ',     usage:'200k Vĩnh Viễn',price:'Liên hệ'},
+    {file:'Extracly Infinty Ver 3',   td:'Nhạy Tâm + Khoá Đầu + Aim Đầu 90% Fix Lag 100% Bản Này Bật Tắt Cân Check Khi Đi Kèo ',       usage:'500k Vĩnh Viễn',price:'Liên hệ'},
+    {file:'Data Esp + AimHead',          td:'Hiển Thị Esp Địch + Khoá Đầu 100% Khi Nhấn Nút Bắn Antiband Cực Cao ',usage:'400k Vĩnh Viễn',price:'Liên hệ'},
+    {file:'Stream Proof x Menu',       td:'Ẩn Hack Khỏi Màn Hình Stream', usage:'500k Vĩnh Viễn',price:'Liên hệ'},
+    {file:'Custom Crosshair',   td:'Dạng App Tuỳ Chỉnh Tâm Súng + Điều Chỉnh Bật Tắt Chức Năng ',       usage:'300k Vĩnh Viễn',price:'Liên hệ'},
+    {file:'Fix Lag + Tối Ưu Máy ',   td:'Fix Lag Máy Hoàn Toàn Và Máy Sẽ Tối Ưu Hết Công Suất An Toàn Cho Máy Sử Dụng Lâu Dài',  usage:'300k Vĩnh Viễn',price:'Liên hệ'},
+    {file:'Fake Lag + Aim Cổ',   td:'Fake Lag Khi Bật Lên Sẽ Kích Hoạt Chức Năng Aim Cổ Khi Bắn Và Không Bị Giật Hay Dịch Chuyển Hay Lỗi Dame ',      usage:'500k Vĩnh Viễn',price:'Liên hệ'},
+    {file:'Config Manager',     td:'Lưu & Tải Cấu Hình Nhanh & Kéo Tâm Nhạy Hơn Tối Ưu Game & Fix Lố & Đầm Tâm',     usage:'350k Vĩnh Viễn',price:'Liên hệ'},
+    {file:'Aimlock Auto Update',        td:'Khi Sử Dụng Bản Này Thì Tự Động Cập Nhật Ob Game Là Sẽ Sử Dụng Lâu Dài Aimlock Không Bị Lỗi Hay Mất Tác Dụng ',    usage:'450k Vĩnh Viễn',price:'Liên hệ'},
+    {file:'Aimlock Premium X Đạn Thẳng',   td:'Bản Này Khi Vuốt Tâm Đạn Sẽ Thẳng Và Khoá Đầu Đi Rank Đi Phòng Rất Oke ',          usage:'300k Vĩnh Viễn',price:'Liên hệ'},
+  ]
+};
+
+function renderCards(tier){
+  document.getElementById('grid-'+tier).innerHTML=products[tier].map((p,i)=>`
+    <div class="prod-card">
+      <div class="card-stripe"></div>
+      <div class="card-body">
+        <div class="card-header-row">
+          <span class="card-num">#${String(i+1).padStart(2,'0')}</span>
+          <span class="card-file-name">${svgFile.replace('class="row-icon"','class="row-icon" style="display:inline;vertical-align:middle;width:14px;height:14px;margin-right:4px;"')} ${p.file}</span>
+        </div>
+        <div class="card-sep"></div>
+        <div class="card-row">${svgZap}<span class="lbl">Tác Dụng :</span><span class="val">${p.td}</span></div>
+      </div>
+      <div class="card-bottom">
+        <div class="price-block">
+          <span class="price-lbl">Giá</span>
+          <span class="price-val">${p.price}</span>
+        </div>
+        <span class="usage-chip">${svgRepeat}${p.usage}</span>
+        <a class="zalo-btn" href="${ZALO}" target="_blank" rel="noopener" onclick="openTrust(event)">${svgChat}Liên Hệ</a>
+      </div>
+    </div>
+  `).join('');
+}
+renderCards('t1');renderCards('t2');renderCards('t3');
+
+function switchTab(tier,btn){
+  document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));
+  document.querySelectorAll('.panel').forEach(p=>p.classList.remove('active'));
+  btn.classList.add('active');
+  document.getElementById('panel-'+tier).classList.add('active');
 }
 
-function closePopup(){
-  document.getElementById("popup").style.display = "none";
-}
+const DUR=5000;let t0=null;
+function closePopup(){const o=document.getElementById('overlay');o.classList.add('hide');setTimeout(()=>o.remove(),650);}
+function tick(ts){if(!t0)t0=ts;const e=ts-t0;document.getElementById('cbar').style.width=Math.max(0,100-(e/DUR)*100)+'%';const s=Math.ceil((DUR-e)/1000);document.getElementById('clabel').textContent=s>0?`Tự động đóng sau ${s} giây...`:'Đang đóng...';if(e<DUR)requestAnimationFrame(tick);else closePopup();}
+requestAnimationFrame(tick);
 
-function login(){
-  var key = document.getElementById("key").value.trim();
-  var status = document.getElementById("status");
+(function(){const c=document.getElementById('stars'),ctx=c.getContext('2d');let st=[];function resize(){c.width=innerWidth;c.height=innerHeight;st=[];for(let i=0;i<180;i++)st.push({x:Math.random()*c.width,y:Math.random()*c.height,r:Math.random()*1.2+.2,a:Math.random()*Math.PI*2,sp:Math.random()*.016+.004,h:Math.random()>.5?'255,180,230':'200,150,255'});}function draw(){ctx.clearRect(0,0,c.width,c.height);st.forEach(s=>{s.a+=s.sp;const al=(Math.sin(s.a)+1)/2*.8+.1;ctx.beginPath();ctx.arc(s.x,s.y,s.r,0,Math.PI*2);ctx.fillStyle=`rgba(${s.h},${al})`;ctx.fill();});requestAnimationFrame(draw);}window.addEventListener('resize',resize);resize();draw();})();
 
-  if(!key){
-    status.innerText = "Nhập key!";
-    return;
-  }
+(function(){const c=document.getElementById('snow'),ctx=c.getContext('2d');let fl=[];function resize(){c.width=innerWidth;c.height=innerHeight;}function mk(r){return{x:Math.random()*innerWidth,y:r?Math.random()*innerHeight:-12,r:Math.random()*2.8+.7,sp:Math.random()*1+.3,dr:(Math.random()-.5)*.4,op:Math.random()*.5+.18,wb:Math.random()*Math.PI*2,ws:Math.random()*.03+.01,t:Math.floor(Math.random()*3)};}function star(x,y,p,r1,r2){ctx.beginPath();for(let i=0;i<p*2;i++){const a=i*Math.PI/p-Math.PI/2,r=i%2===0?r1:r2;i===0?ctx.moveTo(x+r*Math.cos(a),y+r*Math.sin(a)):ctx.lineTo(x+r*Math.cos(a),y+r*Math.sin(a));}ctx.closePath();}function draw(){ctx.clearRect(0,0,c.width,c.height);fl.forEach(f=>{f.wb+=f.ws;f.y+=f.sp;f.x+=f.dr+Math.sin(f.wb)*.3;if(f.y>innerHeight+16)Object.assign(f,mk(false));ctx.save();ctx.globalAlpha=f.op;const p=Math.random()>.6;ctx.fillStyle=p?'rgba(255,180,220,1)':'rgba(210,160,255,1)';ctx.shadowColor=p?'rgba(255,80,160,.6)':'rgba(180,80,255,.6)';ctx.shadowBlur=f.r*3.5;ctx.translate(f.x,f.y);if(f.t===0){ctx.beginPath();ctx.arc(0,0,f.r,0,Math.PI*2);ctx.fill();}else if(f.t===1){star(0,0,6,f.r,f.r*.4);ctx.fill();}else{star(0,0,8,f.r,f.r*.45);ctx.fill();}ctx.restore();});requestAnimationFrame(draw);}window.addEventListener('resize',resize);resize();for(let i=0;i<110;i++)fl.push(mk(true));draw();})();
 
-  if(window.HeadLockV1 && window.HeadLockV1[key]){
-    status.innerText = "✅ Key hợp lệ! Đang chuyển...";
-    setTimeout(()=>{
-      window.location.href = "menu.html";
-    },500);
-  } else {
-    status.innerText = "❌ Sai key!";
-  }
-}
+(function(){const cont=document.getElementById('crystals');const sh=['❄','✦','❋','✼','❅','✿','◈','⬡'];const co=['#ff6eb4','#c084fc','#ffb3d9','#e879f9','#f472b6','#a78bfa'];function spawn(){const el=document.createElement('div');el.className='crystal';el.textContent=sh[Math.floor(Math.random()*sh.length)];const sz=Math.random()*18+8,dur=Math.random()*13+9,del=Math.random()*5;el.style.cssText=`left:${Math.random()*100}%;font-size:${sz}px;color:${co[Math.floor(Math.random()*co.length)]};filter:drop-shadow(0 0 5px currentColor);animation-duration:${dur}s;animation-delay:${del}s;`;cont.appendChild(el);setTimeout(()=>el.remove(),(dur+del)*1000+500);}for(let i=0;i<16;i++)setTimeout(spawn,i*550);setInterval(spawn,1800);})();
 </script>
-
-  }
-}
-</script>
-
 </body>
 </html>
